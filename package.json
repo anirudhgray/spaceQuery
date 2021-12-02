@@ -9,8 +9,12 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "primeflex": "^3.1.0",
+    "primeicons": "^5.0.0",
+    "primevue": "^3.9.1",
     "register-service-worker": "^1.7.1",
     "vue": "^3.0.0",
+    "vue-parallaxy": "^1.1.1",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
   },
