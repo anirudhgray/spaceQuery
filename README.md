@@ -1,5 +1,14 @@
 # API
 
+**/api/v1/users/auths**
+- POST (account creation)
+
+**/api-token-auth**
+- POST (will return token for storage)
+
+**/api-auth**
+- For logging into the browseable API.
+
 ### Prefix:
 /api/v1
 
@@ -10,7 +19,6 @@ Root API for the users app.
 
 **/users/auths**
 - GET
-- POST
   
 **/users/auths/:id**
 - GET

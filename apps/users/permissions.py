@@ -1,6 +1,14 @@
 from rest_framework import permissions
 
 
+class CanPost(permissions.BasePermission):
+
+    def has_permission(self, request, view):
+        if request.method == "POST":
+            return True
+        return False
+
+
 class IsUserAccess(permissions.BasePermission):
     message = "You are not authorized to access other users."
 
