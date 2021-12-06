@@ -52,7 +52,118 @@
       </Card>
     </div>
 
-    <div class="h-auto overflow-auto"></div>
+    <div class="h-auto overflow-auto">
+      <Card v-if="logFlipped" class="col-8 col-offset-2 mb-8 h-auto p-5">
+        <template #content>
+          <div class="grid">
+            <div class="col-6 flex flex-column">
+              <h3 class="text-5xl mb-4">Register</h3>
+              <div class="field">
+                <label for="firstname1">Firstname</label>
+                <input id="firstname1" type="text" class="inputfield w-full" />
+              </div>
+              <div class="field">
+                <label for="lastname1">Lastname</label>
+                <input id="lastname1" type="text" class="inputfield w-full" />
+              </div>
+              <div class="field">
+                <Button label="Log In" class="w-full"></Button>
+              </div>
+              <div class="field mt-auto mb-0">
+                <p>
+                  Already have an account?
+                  <Button
+                    @click="flip"
+                    class="p-button-text pb-0"
+                    label="Log in."
+                  ></Button>
+                </p>
+              </div>
+            </div>
+            <img src="https://picsum.photos/400/400" class="col-6" />
+          </div>
+        </template>
+      </Card>
+
+      <Card v-else class="col-8 col-offset-2 mb-8 h-auto p-5">
+        <template #content>
+          <div class="grid">
+            <img src="https://picsum.photos/400/400" class="col-6" />
+            <div class="col-6 flex flex-column">
+              <h3 class="text-5xl text-right mb-4">Log In</h3>
+              <div class="field">
+                <label for="firstname1">Firstname</label>
+                <input id="firstname1" type="text" class="inputfield w-full" />
+              </div>
+              <div class="field">
+                <label for="lastname1">Lastname</label>
+                <input id="lastname1" type="text" class="inputfield w-full" />
+              </div>
+              <div class="field">
+                <Button label="Log In" class="w-full"></Button>
+              </div>
+              <div class="field mt-auto mb-0">
+                <p>
+                  Logging in is necessary to use this web app. Don't have an
+                  account?
+                  <Button
+                    @click="flip"
+                    label="Register here."
+                    class="p-button-text pb-0"
+                  ></Button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </template>
+      </Card>
+    </div>
+
+    <div class="h-auto overflow-auto">
+      <img
+        src="https://picsum.photos/1000/500"
+        class="col-8 col-offset-2 no-pad"
+      />
+    </div>
+
+    <div class="h-auto overflow-auto">
+      <Card>
+        <template #title>
+          <h3 class="text-center">spaceQuery</h3>
+          <div class="grey col-6 col-offset-3">
+            <h3 class="mb-4">Feedback</h3>
+            <div class="field">
+              <label for="firstname1">Firstname</label>
+              <input id="firstname1" type="text" class="inputfield w-full" />
+            </div>
+            <div class="field">
+              <label for="lastname1">Lastname</label>
+              <input id="lastname1" type="text" class="inputfield w-full" />
+            </div>
+            <div class="field">
+              <Button label="Submit" class="w-full"></Button>
+            </div>
+          </div>
+        </template>
+        <template #content>
+          <div class="flex justify-content-between">
+            <p class="col-3">
+              A webapp to easily query NASA and other space APIs, and save the
+              results.
+            </p>
+            <ul>
+              <li>NASA Open APIs</li>
+              <li>Google Earth</li>
+              <li>Where is the ISS?</li>
+            </ul>
+            <p>View on GitHub</p>
+          </div>
+        </template>
+        <template #footer>
+          <p class="text-center">Made with love by Anirudh for CS50W.</p>
+        </template>
+      </Card>
+    </div>
   </div>
 </template>
 
@@ -65,6 +176,16 @@ export default {
   components: {
     Card,
     Button
+  },
+  data () {
+    return {
+      logFlipped: false
+    }
+  },
+  methods: {
+    flip () {
+      this.logFlipped = !this.logFlipped
+    }
   }
 }
 </script>
@@ -72,5 +193,8 @@ export default {
 <style>
 .grey {
   background: rgb(247, 247, 247);
+}
+.no-pad {
+  padding: 0;
 }
 </style>
