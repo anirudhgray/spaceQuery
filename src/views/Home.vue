@@ -56,19 +56,53 @@
       <Card v-if="logFlipped" class="col-8 col-offset-2 mb-8 h-auto p-5">
         <template #content>
           <div class="grid">
-            <div class="col-6 flex flex-column">
+            <form
+              class="col-6 flex flex-column"
+              @submit.prevent="submitRegisterForm"
+            >
               <h3 class="text-5xl mb-4">Register</h3>
+
               <div class="field">
-                <label for="firstname1">Firstname</label>
-                <input id="firstname1" type="text" class="inputfield w-full" />
+                <label for="reg-email">Email</label>
+                <input
+                  id="reg-email"
+                  type="email"
+                  v-model="email"
+                  class="inputfield w-full"
+                />
               </div>
+
               <div class="field">
-                <label for="lastname1">Lastname</label>
-                <input id="lastname1" type="text" class="inputfield w-full" />
+                <label for="reg-pwd">Password</label>
+                <input
+                  id="reg-pwd"
+                  type="password"
+                  v-model="password"
+                  class="inputfield w-full"
+                />
               </div>
+
               <div class="field">
-                <Button label="Log In" class="w-full"></Button>
+                <label for="reg-pwd-rep">Repeat Password</label>
+                <input
+                  id="reg-pwd-rep"
+                  type="password"
+                  v-model="password2"
+                  class="inputfield w-full"
+                />
               </div>
+
+              <Message :closable="false" severity="error" v-if="errors.length">
+                <p v-for="error in errors" :key="error">{{ error }}</p>
+              </Message>
+              <Message :closable="false" severity="success" v-if="success">
+                <p>Account created successfully. You can log in now.</p>
+              </Message>
+
+              <div class="field">
+                <Button type="submit" label="Register" class="w-full"></Button>
+              </div>
+
               <div class="field mt-auto mb-0">
                 <p>
                   Already have an account?
@@ -79,8 +113,8 @@
                   ></Button>
                 </p>
               </div>
-            </div>
-            <img src="https://picsum.photos/400/400" class="col-6" />
+            </form>
+            <img src="https://picsum.photos/400/550" class="col-6" />
           </div>
         </template>
       </Card>
@@ -88,20 +122,41 @@
       <Card v-else class="col-8 col-offset-2 mb-8 h-auto p-5">
         <template #content>
           <div class="grid">
-            <img src="https://picsum.photos/400/400" class="col-6" />
-            <div class="col-6 flex flex-column">
+            <img src="https://picsum.photos/400/550" class="col-6" />
+            <form
+              class="col-6 flex flex-column"
+              @submit.prevent="submitLoginForm"
+            >
               <h3 class="text-5xl text-right mb-4">Log In</h3>
+
               <div class="field">
-                <label for="firstname1">Firstname</label>
-                <input id="firstname1" type="text" class="inputfield w-full" />
+                <label for="login-email">Email</label>
+                <input
+                  id="login-email"
+                  type="email"
+                  v-model="email"
+                  class="inputfield w-full"
+                />
               </div>
+
               <div class="field">
-                <label for="lastname1">Lastname</label>
-                <input id="lastname1" type="text" class="inputfield w-full" />
+                <label for="login-pwd">Password</label>
+                <input
+                  id="login-pwd"
+                  type="password"
+                  v-model="password"
+                  class="inputfield w-full"
+                />
               </div>
+
+              <Message :closable="false" severity="error" v-if="errors.length">
+                <p v-for="error in errors" :key="error">{{ error }}</p>
+              </Message>
+
               <div class="field">
-                <Button label="Log In" class="w-full"></Button>
+                <Button type="submit" label="Log In" class="w-full"></Button>
               </div>
+
               <div class="field mt-auto mb-0">
                 <p>
                   Logging in is necessary to use this web app. Don't have an
@@ -113,7 +168,7 @@
                   ></Button>
                 </p>
               </div>
-            </div>
+            </form>
           </div>
         </template>
       </Card>
@@ -126,65 +181,115 @@
       />
     </div>
 
-    <div class="h-auto overflow-auto">
-      <Card>
-        <template #title>
-          <h3 class="text-center">spaceQuery</h3>
-          <div class="grey col-6 col-offset-3">
-            <h3 class="mb-4">Feedback</h3>
-            <div class="field">
-              <label for="firstname1">Firstname</label>
-              <input id="firstname1" type="text" class="inputfield w-full" />
-            </div>
-            <div class="field">
-              <label for="lastname1">Lastname</label>
-              <input id="lastname1" type="text" class="inputfield w-full" />
-            </div>
-            <div class="field">
-              <Button label="Submit" class="w-full"></Button>
-            </div>
-          </div>
-        </template>
-        <template #content>
-          <div class="flex justify-content-between">
-            <p class="col-3">
-              A webapp to easily query NASA and other space APIs, and save the
-              results.
-            </p>
-            <ul>
-              <li>NASA Open APIs</li>
-              <li>Google Earth</li>
-              <li>Where is the ISS?</li>
-            </ul>
-            <p>View on GitHub</p>
-          </div>
-        </template>
-        <template #footer>
-          <p class="text-center">Made with love by Anirudh for CS50W.</p>
-        </template>
-      </Card>
-    </div>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import Card from 'primevue/card'
 import Button from 'primevue/button'
+import Footer from '../components/Footer.vue'
+import Message from 'primevue/message'
+import axios from 'axios'
+axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 export default {
   name: 'Home',
   components: {
     Card,
-    Button
+    Button,
+    Footer,
+    Message
   },
   data () {
     return {
-      logFlipped: false
+      logFlipped: false,
+      email: '',
+      password: '',
+      password2: '',
+      errors: [],
+      success: false
     }
   },
   methods: {
     flip () {
       this.logFlipped = !this.logFlipped
+    },
+    async submitRegisterForm () {
+      this.errors = []
+      this.success = false
+
+      if (this.email === '') {
+        this.errors.push('The email is missing.')
+      }
+      if (this.password.length < 8) {
+        this.errors.push('The password is too short.')
+      }
+      if (this.password !== this.password2) {
+        this.errors.push('The passwords do not match.')
+      }
+
+      if (!this.errors.length) {
+        const formData = {
+          email: this.email,
+          password: this.password
+        }
+
+        await axios
+          .post('/api/v1/users/auths/', formData)
+          .then(response => {
+            this.success = true
+          })
+          .catch(error => {
+            if (error.response) {
+              for (const property in error.response.data) {
+                this.errors.push(`${property}: ${error.response.data[property]}`)
+              }
+            } else if (error.message) {
+              this.errors.push('Something went wrong.' + error)
+            }
+          })
+      }
+    },
+    async submitLoginForm () {
+      axios.defaults.headers.common.Authorization = ''
+      localStorage.removeItem('token')
+
+      this.errors = []
+      this.success = false
+
+      if (this.email === '') {
+        this.errors.push('The email is missing.')
+      }
+      if (this.password.length < 8) {
+        this.errors.push('The password is too short.')
+      }
+
+      if (!this.errors.length) {
+        const formData = {
+          username: this.email,
+          password: this.password
+        }
+
+        await axios
+          .post('/api-token-auth/', formData)
+          .then(response => {
+            const token = response.data.token
+            this.$store.commit('setToken', token)
+            axios.defaults.headers.common.Authorization = 'Token ' + token
+            localStorage.setItem('token', token)
+            this.$router.push('/profile/you')
+          })
+          .catch(error => {
+            if (error.response) {
+              for (const property in error.response.data) {
+                this.errors.push(`${property}: ${error.response.data[property]}`)
+              }
+            } else if (error.message) {
+              this.errors.push('Something went wrong.' + error)
+            }
+          })
+      }
     }
   }
 }
