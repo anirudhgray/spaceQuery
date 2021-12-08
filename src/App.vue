@@ -76,6 +76,13 @@ select {
   font: inherit;
 }
 
+.grey {
+  background: rgb(247, 247, 247);
+}
+.no-pad {
+  padding: 0;
+}
+
 /* remove animations for people who've turned them off */
 @media (prefers-reduced-motion: reduce) {
   *,

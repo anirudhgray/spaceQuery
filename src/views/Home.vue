@@ -52,7 +52,7 @@
       </Card>
     </div>
 
-    <div class="h-auto overflow-auto">
+    <div v-if="!$store.state.isAuthenticated" class="h-auto overflow-auto">
       <Card v-if="logFlipped" class="col-8 col-offset-2 mb-8 h-auto p-5">
         <template #content>
           <div class="grid">
@@ -63,32 +63,42 @@
               <h3 class="text-5xl mb-4">Register</h3>
 
               <div class="field">
-                <label for="reg-email">Email</label>
-                <input
-                  id="reg-email"
-                  type="email"
-                  v-model="email"
-                  class="inputfield w-full"
-                />
+                <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon">
+                    <i class="pi pi-user"></i>
+                  </span>
+                  <InputText
+                    id="reg-email"
+                    type="email"
+                    v-model="email"
+                    class="inputfield w-full"
+                    placeholder="Email"
+                  />
+                </div>
               </div>
 
               <div class="field">
-                <label for="reg-pwd">Password</label>
-                <input
+                <Password
                   id="reg-pwd"
                   type="password"
                   v-model="password"
                   class="inputfield w-full"
+                  inputClass="inputfield w-full"
+                  toggleMask
+                  placeholder="Password"
                 />
               </div>
 
               <div class="field">
-                <label for="reg-pwd-rep">Repeat Password</label>
-                <input
+                <Password
                   id="reg-pwd-rep"
                   type="password"
                   v-model="password2"
                   class="inputfield w-full"
+                  inputClass="inputfield w-full"
+                  toggleMask
+                  :feedback="false"
+                  placeholder="Repeat Password"
                 />
               </div>
 
@@ -130,23 +140,32 @@
               <h3 class="text-5xl text-right mb-4">Log In</h3>
 
               <div class="field">
-                <label for="login-email">Email</label>
-                <input
-                  id="login-email"
-                  type="email"
-                  v-model="email"
-                  class="inputfield w-full"
-                />
+                <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon">
+                    <i class="pi pi-user"></i>
+                  </span>
+                  <InputText
+                    id="login-email"
+                    type="email"
+                    v-model="email"
+                    class="inputfield w-full"
+                    placeholder="Email"
+                  />
+                </div>
               </div>
 
               <div class="field">
-                <label for="login-pwd">Password</label>
-                <input
+                <Password
                   id="login-pwd"
                   type="password"
                   v-model="password"
                   class="inputfield w-full"
-                />
+                  inputClass="inputfield w-full"
+                  toggleMask
+                  :feedback="false"
+                  placeholder="Password"
+                >
+                </Password>
               </div>
 
               <Message :closable="false" severity="error" v-if="errors.length">
@@ -174,6 +193,29 @@
       </Card>
     </div>
 
+    <div v-else>
+      <Card class="col-8 col-offset-2 mb-8 h-auto p-5">
+        <template #title>
+          <h3 class="text-5xl text-right mb-4">You are already logged in.</h3>
+        </template>
+        <template #content>
+          <p class="text-right">As {{ $store.state.user.email }}</p>
+        </template>
+        <template #footer>
+          <div class="p-buttonset">
+            <Button
+              @click="logout"
+              label="Log out"
+              class="p-button-danger col-6"
+            ></Button>
+            <router-link to="/profile/you"
+              ><Button label="Enter" class="p-button-success col-6"></Button
+            ></router-link>
+          </div>
+        </template>
+      </Card>
+    </div>
+
     <div class="h-auto overflow-auto">
       <img
         src="https://picsum.photos/1000/500"
@@ -190,6 +232,8 @@ import Card from 'primevue/card'
 import Button from 'primevue/button'
 import Footer from '../components/Footer.vue'
 import Message from 'primevue/message'
+import Password from 'primevue/password'
+import InputText from 'primevue/inputtext'
 import axios from 'axios'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
@@ -199,7 +243,9 @@ export default {
     Card,
     Button,
     Footer,
-    Message
+    Message,
+    Password,
+    InputText
   },
   data () {
     return {
@@ -208,10 +254,14 @@ export default {
       password: '',
       password2: '',
       errors: [],
-      success: false
+      success: false,
+      curr: ''
     }
   },
   methods: {
+    logout () {
+      this.$store.dispatch('logout')
+    },
     flip () {
       this.logFlipped = !this.logFlipped
     },
@@ -278,7 +328,6 @@ export default {
             this.$store.commit('setToken', token)
             axios.defaults.headers.common.Authorization = 'Token ' + token
             localStorage.setItem('token', token)
-            this.$router.push('/profile/you')
           })
           .catch(error => {
             if (error.response) {
@@ -289,17 +338,21 @@ export default {
               this.errors.push('Something went wrong.' + error)
             }
           })
+
+        await axios
+          .get('/api/v1/users/me')
+          .then(response => {
+            this.$store.commit('setUser', { id: response.data[0].id, email: response.data[0].email })
+            localStorage.setItem('email', response.data[0].email)
+            localStorage.setItem('userid', response.data[0].id)
+
+            this.$router.push('/profile/you')
+          })
+          .catch(error => {
+            console.log(error)
+          })
       }
     }
   }
 }
 </script>
-
-<style>
-.grey {
-  background: rgb(247, 247, 247);
-}
-.no-pad {
-  padding: 0;
-}
-</style>
