@@ -208,7 +208,7 @@
               label="Log out"
               class="p-button-danger col-6"
             ></Button>
-            <router-link to="/profile/you"
+            <router-link to="/user/you"
               ><Button label="Enter" class="p-button-success col-6"></Button
             ></router-link>
           </div>
@@ -346,7 +346,7 @@ export default {
             localStorage.setItem('email', response.data[0].email)
             localStorage.setItem('userid', response.data[0].id)
 
-            this.$router.push('/profile/you')
+            this.$router.push('/user/you')
           })
           .catch(error => {
             console.log(error)

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Profile from '../views/Profile.vue'
+import UserSearch from '../views/UserSearch.vue'
 import store from '../store'
 
 const routes = [
@@ -13,9 +14,17 @@ const routes = [
     }
   },
   {
-    path: '/profile/you',
+    path: '/user/:id',
     name: 'Profile',
     component: Profile,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/user/search',
+    name: 'UserSearch',
+    component: UserSearch,
     meta: {
       requireLogin: true
     }

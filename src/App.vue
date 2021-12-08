@@ -1,5 +1,5 @@
 <template>
-  <router-view />
+  <router-view :key="$route.fullPath" />
 </template>
 
 <script>
@@ -81,6 +81,24 @@ select {
 }
 .no-pad {
   padding: 0;
+}
+.result-card::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: " ";
+  background-color: transparent;
+  border: 3px solid purple;
+  opacity: 0;
+  transition: opacity ease-in-out 250ms;
+}
+.result-card:hover::after {
+  opacity: 1;
+}
+.result-card {
+  position: relative;
 }
 
 /* remove animations for people who've turned them off */

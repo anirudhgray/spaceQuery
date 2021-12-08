@@ -1,59 +1,55 @@
 <template>
   <div class="grey flex flex-column">
-    <div class="grid justify-content-between mt-4 mx-4">
-      <nav>
-        <router-link class="mx-2" to="/">Landing</router-link>
-        <router-link class="mx-2" to="/profile/you">Your Profile</router-link>
-        <router-link class="mx-2" to="#">Explore APIs</router-link>
-        <router-link class="mx-2" to="#">Internal Content</router-link>
-        <router-link class="mx-2" to="#">Search Users</router-link>
-      </nav>
-      <Button @click="logout" class="p-button-danger" label="Log Out"></Button>
-    </div>
+    <Navbar></Navbar>
     <div class="h-auto overflow-auto">
-      <Card class="m-4">
-        <template #title>
-          <h1>{{ $store.state.user.email }}</h1>
-        </template>
-        <template #content>
-          <div v-if="!edit">
-            <p>First name: {{ firstname }}</p>
-            <p>Last name: {{ lastname }}</p>
-            <p>Github: {{ github }}</p>
-            <p>Saved results: {{ saved }}</p>
-            <p>Queries made: {{ queries }}</p>
-          </div>
-          <div v-else>
-            <div class="field">
-              <InputText placeholder="Firstname" v-model="firstname" />
+      <form @submit.prevent="confirmEdit($store.state.user.id)">
+        <Card class="m-4">
+          <template #title>
+            <Avatar size="xlarge" icon="pi pi-user"></Avatar>
+            <h1>{{ email }}</h1>
+          </template>
+          <template #content>
+            <div v-if="!edit">
+              <p>First name: {{ firstname }}</p>
+              <p>Last name: {{ lastname }}</p>
+              <p>Github: {{ github }}</p>
+              <p>Saved results: {{ saved }}</p>
+              <p>Queries made: {{ queries }}</p>
             </div>
-            <div class="field">
-              <InputText placeholder="Lastname" v-model="lastname" />
+            <div v-else>
+              <div class="field">
+                <InputText placeholder="Firstname" v-model="firstname" />
+              </div>
+              <div class="field">
+                <InputText placeholder="Lastname" v-model="lastname" />
+              </div>
+              <div class="field">
+                <InputText placeholder="Github" v-model="github" />
+              </div>
+              <p>Saved results: {{ saved }}</p>
+              <p>Queries made: {{ queries }}</p>
             </div>
-            <div class="field">
-              <InputText placeholder="Github" v-model="github" />
+          </template>
+          <template #footer>
+            <div v-if="this.$route.params.id === 'you'">
+              <Button
+                v-if="!edit"
+                class="p-button-text"
+                label="Edit Profile"
+                icon="pi pi-user-edit"
+                @click="toggleEdit"
+              ></Button>
+              <Button
+                v-else
+                type="submit"
+                class="p-button-text"
+                label="Confirm"
+                icon="pi pi-check"
+              ></Button>
             </div>
-            <p>Saved results: {{ saved }}</p>
-            <p>Queries made: {{ queries }}</p>
-          </div>
-        </template>
-        <template #footer>
-          <Button
-            v-if="!edit"
-            class="p-button-text"
-            label="Edit Profile"
-            icon="pi pi-user-edit"
-            @click="toggleEdit"
-          ></Button>
-          <Button
-            v-else
-            class="p-button-text"
-            label="Confirm"
-            icon="pi pi-check"
-            @click="confirmEdit($store.state.user.id)"
-          ></Button>
-        </template>
-      </Card>
+          </template>
+        </Card>
+      </form>
     </div>
     <Footer></Footer>
   </div>
@@ -64,17 +60,21 @@ import Button from 'primevue/button'
 import Card from 'primevue/card'
 import Footer from '../components/Footer.vue'
 import InputText from 'primevue/inputtext'
+import Navbar from '../components/Navbar.vue'
+import Avatar from 'primevue/avatar'
 import axios from 'axios'
 
 export default {
   name: 'Profile',
   data () {
     return {
-      firstname: 'nil',
-      lastname: 'nil',
-      github: 'nil',
-      saved: 'nil',
-      queries: 'nil',
+      email: '',
+      pfp: '',
+      firstname: '-',
+      lastname: '-',
+      github: '-',
+      saved: '-',
+      queries: '-',
       edit: false
     }
   },
@@ -82,10 +82,16 @@ export default {
     Button,
     Footer,
     Card,
-    InputText
+    InputText,
+    Navbar,
+    Avatar
   },
   mounted () {
-    this.fetchProfile(this.$store.state.user.id)
+    if (this.$route.params.id === 'you') {
+      this.fetchProfile(this.$store.state.user.id)
+    } else {
+      this.fetchProfile(this.$route.params.id)
+    }
   },
   methods: {
     toggleEdit () {
@@ -98,16 +104,20 @@ export default {
           this.toggleEdit()
         })
     },
-    logout () {
-      this.$store.dispatch('logout')
-    },
     async fetchProfile (userid) {
       await axios
         .get(`/api/v1/users/profiles/${userid}/`)
         .then(response => {
-          this.firstname = response.data.first_name
-          this.lastname = response.data.last_name
-          this.github = response.data.github_username
+          this.email = response.data.email
+          if (response.data.first_name !== '') {
+            this.firstname = response.data.first_name
+          }
+          if (response.data.last_name !== '') {
+            this.lastname = response.data.last_name
+          }
+          if (response.data.github_username !== '') {
+            this.github = response.data.github_username
+          }
           this.saved = response.data.saved_results
           this.queries = response.data.queries_made
         })
