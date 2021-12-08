@@ -20,7 +20,8 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model = UserProfile
         fields = ('url', 'user', 'first_name', 'last_name',
                   'github_username', 'image', 'saved_results', 'queries_made')
-        extra_kwargs = {'user': {'read_only': True}}
+        extra_kwargs = {'user': {'read_only': True}, 'saved_results': {
+            'read_only': True}, 'queries_made': {'read_only': True}}
 
     def get_fields(self, *args, **kwargs):
         fields = super(UserProfileSerializer, self).get_fields(*args, **kwargs)

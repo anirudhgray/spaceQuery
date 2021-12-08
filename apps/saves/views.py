@@ -9,3 +9,6 @@ class SaveViewSet(viewsets.ModelViewSet):
     queryset = Save.objects.all()
     serializer_class = SaveSerializer
     permission_classes = (IsAuthenticated, IsSaveAccess)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)

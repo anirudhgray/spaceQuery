@@ -28,3 +28,12 @@ class User_logout(GenericAPIView):
     def get(self, request, format=None):
         request.user.auth_token.delete()
         return Response("Logged out.")
+
+
+class MeViewSet(viewsets.ModelViewSet):
+    queryset = get_user_model().objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        return get_user_model().objects.filter(id=self.request.user.id)
