@@ -5,7 +5,9 @@
       <router-link class="navlink mx-2" to="/user/you"
         >Your Profile</router-link
       >
-      <router-link class="navlink mx-2" to="#">Explore APIs</router-link>
+      <router-link class="navlink mx-2" to="/explore/external"
+        >Explore APIs</router-link
+      >
       <router-link class="navlink mx-2" to="#">Internal Content</router-link>
       <router-link class="navlink mx-2" to="/user/search"
         >Search Users</router-link

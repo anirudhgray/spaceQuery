@@ -89,6 +89,7 @@ select {
   width: 100%;
   height: 100%;
   content: " ";
+  z-index: -1;
   background-color: transparent;
   border: 3px solid purple;
   opacity: 0;
@@ -99,6 +100,12 @@ select {
 }
 .result-card {
   position: relative;
+  z-index: 1;
+  max-width: 35rem;
+}
+a {
+  text-decoration: none;
+  color: grey;
 }
 
 /* remove animations for people who've turned them off */

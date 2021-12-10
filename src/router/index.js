@@ -2,6 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Profile from '../views/Profile.vue'
 import UserSearch from '../views/UserSearch.vue'
+import Explore from '../views/Explore.vue'
+import MarsRoverPhotos from '../views/Externals/MarsRoverPhotos.vue'
+import AsteroidsNeoWs from '../views/Externals/AsteroidsNeoWs.vue'
 import store from '../store'
 
 const routes = [
@@ -25,6 +28,30 @@ const routes = [
     path: '/user/search',
     name: 'UserSearch',
     component: UserSearch,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/explore/external',
+    name: 'ExploreExternal',
+    component: Explore,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/explore/external/mars-rover-photos',
+    name: 'MarsRoverPhotos',
+    component: MarsRoverPhotos,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/explore/external/asteroids-neows',
+    name: 'AsteroidsNeoWs',
+    component: AsteroidsNeoWs,
     meta: {
       requireLogin: true
     }
