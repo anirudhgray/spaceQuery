@@ -5,11 +5,13 @@ from rest_framework.schemas import get_schema_view
 from rest_framework import routers
 from apps.users.urls import router as user_router
 from apps.saves.urls import router as save_router
+from apps.externals.urls import router as external_router
 from apps import users
 
 router = routers.DefaultRouter()
 router.registry.extend(user_router.registry)
 router.registry.extend(save_router.registry)
+router.registry.extend(external_router.registry)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

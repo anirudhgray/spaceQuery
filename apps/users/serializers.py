@@ -15,10 +15,11 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    email = serializers.CharField(source='user.email', read_only=True)
 
     class Meta:
         model = UserProfile
-        fields = ('url', 'user', 'first_name', 'last_name',
+        fields = ('url', 'user', 'email', 'first_name', 'last_name',
                   'github_username', 'image', 'saved_results', 'queries_made')
         extra_kwargs = {'user': {'read_only': True}, 'saved_results': {
             'read_only': True}, 'queries_made': {'read_only': True}}

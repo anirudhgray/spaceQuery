@@ -20,6 +20,13 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     serializer_class = UserProfileSerializer
     permission_classes = (IsProfileAccess, IsAuthenticated)
 
+    def get_queryset(self):
+        queryset = UserProfile.objects.all()
+        search = self.request.query_params.get('search')
+        if search is not None:
+            queryset = queryset.filter(user__email__contains=search)
+        return queryset
+
 
 class User_logout(GenericAPIView):
     permission_classes = [(IsAuthenticated)]

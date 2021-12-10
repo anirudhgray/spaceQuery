@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     'corsheaders',
     'apps.users',
-    'apps.saves'
+    'apps.saves',
+    'apps.externals'
 ]
 
 REST_FRAMEWORK = {
