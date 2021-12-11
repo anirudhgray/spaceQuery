@@ -107,6 +107,9 @@ a {
   text-decoration: none;
   color: grey;
 }
+.darker-card {
+  background: rgb(218, 218, 218);
+}
 
 /* remove animations for people who've turned them off */
 @media (prefers-reduced-motion: reduce) {

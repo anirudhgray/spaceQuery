@@ -139,7 +139,17 @@
               label="Next"
               @click="nextResult(1)"
             />
-            <Button class="absolute right-0" icon="pi pi-bookmark" />
+            <Button
+              v-if="bookmarked.includes(index)"
+              class="absolute right-0"
+              icon="pi pi-check"
+            />
+            <Button
+              @click="saveResult"
+              v-else
+              class="absolute right-0"
+              icon="pi pi-bookmark"
+            />
           </div>
         </template>
       </Card>
@@ -205,13 +215,49 @@ export default {
       results: [],
       index: 0,
       roverInfoDisplay: null,
-      loading: false
+      loading: false,
+      bookmarked: []
     }
   },
   mounted () {
     this.getRovers()
   },
   methods: {
+    async saveHistory () {
+      const title = 'Mars Rover Photos'
+      const info = JSON.stringify({
+        Rover: this.rover.name,
+        DayFilter: this.dayFilterChoice,
+        DayEarth: this.dayEarth,
+        DayMars: this.dayMars,
+        Camera: this.camera
+      })
+      await axios
+        .post('api/v1/history/', { title: title, info: info })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    async saveResult () {
+      const title = 'Mars Rover Photos'
+      const info = JSON.stringify({
+        image: this.results[this.index].img_src,
+        text: {
+          Rover: this.results[this.index].rover.name,
+          EarthDate: this.results[this.index].earth_date,
+          MarsSol: this.results[this.index].sol,
+          Camera: this.results[this.index].camera.name1
+        }
+      })
+      await axios
+        .post('/api/v1/saves/', { title: title, info: info })
+        .then(() => {
+          this.bookmarked.push(this.index)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
     resultCheck () {
       if (!this.results.length) {
         this.queryFail = true
@@ -250,6 +296,8 @@ export default {
       }
     },
     async sendQuery () {
+      this.saveHistory()
+      this.bookmarked = []
       this.queryFail = false
       this.loading = true
       this.index = 0
@@ -266,8 +314,12 @@ export default {
           baseURL += '/' + 'latest_photos'
         } else {
           baseURL += '/photos'
-          if (this.dayFilterChoice === 'Earth Day') {
-            params.earth_date = this.dayEarth
+          if (this.dayFilterChoice === 'Earth Day' && this.dayEarth) {
+            const dayEarthList = String(this.dayEarth).split(' ')
+            const year = dayEarthList[3]
+            const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].indexOf(dayEarthList[1])
+            const day = dayEarthList[2]
+            params.earth_date = year + '-' + month + '-' + day
           } else if (this.dayFilterChoice === 'Mars Sol') {
             params.sol = this.dayMars
           }
