@@ -11,3 +11,13 @@ class Save(models.Model):
 
     def __str__(self):
         return f"{self.user}, {self.title}"
+
+
+class History(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=CASCADE, related_name="history")
+    title = models.CharField(max_length=1000)
+    info = models.TextField()
+    search_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user}, {self.title}"
