@@ -8,12 +8,13 @@
         >
       </template>
       <template #title>
-        <h1>Asteroids — NeoWs</h1>
+        <h1>ISS Tracker</h1>
       </template>
       <template #subtitle>
         <p>
-          Near Earth Object Web Service. Credit:
-          <a href="https://github.com/SpaceRocks/">The SpaceRocks Team</a>
+          Where is the ISS right now? Get coordinates and satellite imagery.
+          Credit:
+          <a href="https://github.com/open-notify">Open Notify</a>
         </p>
       </template>
       <template #content>

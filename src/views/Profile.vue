@@ -4,48 +4,77 @@
     <div class="h-auto overflow-auto">
       <form @submit.prevent="confirmEdit($store.state.user.id)">
         <Card class="m-4">
-          <template #title>
-            <Avatar size="xlarge" icon="pi pi-user"></Avatar>
-            <h1>{{ email }}</h1>
-          </template>
           <template #content>
-            <div v-if="!edit">
-              <p>First name: {{ firstname }}</p>
-              <p>Last name: {{ lastname }}</p>
-              <p>Github: {{ github }}</p>
-              <p>Saved results: {{ saved }}</p>
-              <p>Queries made: {{ queries }}</p>
-            </div>
-            <div v-else>
-              <div class="field">
-                <InputText placeholder="Firstname" v-model="firstname" />
+            <div class="grid">
+              <div class="col-3">
+                <Avatar
+                  class="w-14rem h-14rem"
+                  size="xlarge"
+                  icon="pi pi-user"
+                ></Avatar>
               </div>
-              <div class="field">
-                <InputText placeholder="Lastname" v-model="lastname" />
+              <div class="col-5">
+                <h1>{{ email }}</h1>
+                <div v-if="!edit">
+                  <p><b>First name:</b> {{ firstname }}</p>
+                  <p><b>Last name:</b> {{ lastname }}</p>
+                  <p><b>Github:</b> {{ github }}</p>
+                </div>
+                <div v-else>
+                  <div class="field">
+                    <InputText placeholder="Firstname" v-model="firstname" />
+                  </div>
+                  <div class="field">
+                    <InputText placeholder="Lastname" v-model="lastname" />
+                  </div>
+                  <div class="field">
+                    <InputText placeholder="Github" v-model="github" />
+                  </div>
+                </div>
               </div>
-              <div class="field">
-                <InputText placeholder="Github" v-model="github" />
+              <div class="col text-right">
+                <p>Saved results</p>
+                <p class="text-8xl">{{ saved }}</p>
               </div>
-              <p>Saved results: {{ saved }}</p>
-              <p>Queries made: {{ queries }}</p>
+              <div class="col text-right">
+                <p>Queries made</p>
+                <p class="text-8xl">{{ queries }}</p>
+              </div>
             </div>
           </template>
           <template #footer>
-            <div v-if="this.$route.params.id === 'you'">
-              <Button
-                v-if="!edit"
-                class="p-button-text"
-                label="Edit Profile"
-                icon="pi pi-user-edit"
-                @click="toggleEdit"
-              ></Button>
-              <Button
-                v-else
-                type="submit"
-                class="p-button-text"
-                label="Confirm"
-                icon="pi pi-check"
-              ></Button>
+            <div class="grid justify-content-between">
+              <div v-if="this.$route.params.id === 'you'">
+                <Button
+                  v-if="!edit"
+                  class="p-button-text"
+                  label="Edit Profile"
+                  icon="pi pi-user-edit"
+                  @click="toggleEdit"
+                ></Button>
+                <Button
+                  v-else
+                  type="submit"
+                  class="p-button-text"
+                  label="Confirm"
+                  icon="pi pi-check"
+                ></Button>
+              </div>
+              <div v-if="this.$route.params.id === 'you'">
+                <Button
+                  v-if="!historyToggle"
+                  class="mb-4"
+                  icon="pi pi-history"
+                  label="Show History"
+                  @click="getHistory"
+                />
+                <Button
+                  v-if="historyToggle"
+                  class="mb-4"
+                  label="Hide History"
+                  @click="hideHistory"
+                />
+              </div>
             </div>
           </template>
         </Card>
@@ -54,18 +83,6 @@
 
     <div>
       <div class="flex flex-column align-items-center">
-        <Button
-          v-if="this.$route.params.id === 'you' && !historyToggle"
-          class="mb-4"
-          label="Show History"
-          @click="getHistory"
-        />
-        <Button
-          v-if="this.$route.params.id === 'you' && historyToggle"
-          class="mb-4"
-          label="Hide History"
-          @click="hideHistory"
-        />
         <i v-if="historyLoad" class="pi pi-spin pi-spinner text-4xl mb-2"></i>
       </div>
       <div v-if="historyToggle">
@@ -74,7 +91,7 @@
           <Card
             v-for="historyItem in historyDisplays"
             :key="historyItem.id"
-            class="relative col-12 md:col-5 lg:col-3 mb-4 md:mb-0 darker-card"
+            class="relative col-12 md:col-5 lg:col-3 m-3 darker-card"
           >
             <template #title>
               <h2>{{ historyItem.title }}</h2>
@@ -94,19 +111,19 @@
         </div>
       </div>
 
-      <div>
+      <div v-if="saveDisplays.length">
         <h2 class="text-center">Saved Results</h2>
         <div class="grid justify-content-evenly mx-4 my-4">
           <Card
             v-for="(save, i) in saveDisplays"
-            class="relative col-12 md:col-5 lg:col-3 mb-4 md:mb-0"
+            class="relative col-12 md:col-5 lg:col-3 m-3"
             :key="save.id"
           >
             <template #title>
               <h2>{{ save.title }}</h2>
             </template>
             <template #content>
-              <img :src="JSON.parse(save.info).image" />
+              <Image :src="JSON.parse(save.info).image" preview />
               <p
                 v-for="(item, j) in Object.keys(JSON.parse(save.info).text)"
                 :key="j"
@@ -118,12 +135,15 @@
               <Button
                 v-if="this.$route.params.id === 'you'"
                 icon="pi pi-trash"
-                class="absolute right-0 bottom-0 mr-4 mb-4"
+                class="absolute right-0 bottom-0 mr-4 mb-4 p-button-warning"
                 @click="removeSaved(save.id, i)"
               />
             </template>
           </Card>
         </div>
+      </div>
+      <div v-else>
+        <h2 class="text-center mb-4">No saved results to see D:</h2>
       </div>
     </div>
     <Footer></Footer>
@@ -137,6 +157,7 @@ import Footer from '../components/Footer.vue'
 import InputText from 'primevue/inputtext'
 import Navbar from '../components/Navbar.vue'
 import Avatar from 'primevue/avatar'
+import Image from 'primevue/image'
 import axios from 'axios'
 
 export default {
@@ -163,7 +184,8 @@ export default {
     Card,
     InputText,
     Navbar,
-    Avatar
+    Avatar,
+    Image
   },
   mounted () {
     if (this.$route.params.id === 'you') {
@@ -195,6 +217,7 @@ export default {
         .delete(`/api/v1/saves/${id}`)
         .then(response => {
           console.log(response)
+          this.saved -= 1
         })
         .catch(error => {
           console.log(error)

@@ -1,32 +1,34 @@
 <template>
-  <div class="grey flex flex-column">
-    <Navbar></Navbar>
-    <form
-      @submit.prevent="searchUsers"
-      class="p-inputgroup col-6 col-offset-3 my-4"
-    >
-      <InputText
-        v-model="search"
-        placeholder="Search Users by Email"
-      ></InputText>
-      <Button type="submit" icon="pi pi-search"></Button>
-    </form>
-    <div class="grid grid-nogutter justify-content-evenly mb-2">
-      <Card
-        v-for="user in results"
-        :key="user.user"
-        class="m-2 px-2 -pb-1 result-card"
-        @click="routerUserPage(user.user)"
+  <div class="grey flex flex-column justify-content-between h-screen">
+    <div>
+      <Navbar></Navbar>
+      <form
+        @submit.prevent="searchUsers"
+        class="p-inputgroup col-6 col-offset-3 my-4"
       >
-        <template #content>
-          <div class="grid -mb-2">
-            <Avatar icon="pi pi-user"></Avatar>
-            <p class="ml-2">{{ user.email }}</p>
-          </div>
-        </template>
-      </Card>
+        <InputText
+          v-model="search"
+          placeholder="Search Users by Email"
+        ></InputText>
+        <Button type="submit" icon="pi pi-search"></Button>
+      </form>
+      <div class="grid grid-nogutter justify-content-evenly mb-2">
+        <Card
+          v-for="user in results"
+          :key="user.user"
+          class="m-2 px-2 -pb-1 result-card"
+          @click="routerUserPage(user.user)"
+        >
+          <template #content>
+            <div class="grid -mb-2">
+              <Avatar icon="pi pi-user"></Avatar>
+              <p class="ml-2">{{ user.email }}</p>
+            </div>
+          </template>
+        </Card>
+      </div>
     </div>
-    <Footer></Footer>
+    <Footer class="bottom-0"></Footer>
   </div>
 </template>
 

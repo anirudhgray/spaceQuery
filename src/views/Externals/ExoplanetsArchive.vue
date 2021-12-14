@@ -8,12 +8,15 @@
         >
       </template>
       <template #title>
-        <h1>Asteroids — NeoWs</h1>
+        <h1>Exoplanets Archive</h1>
       </template>
       <template #subtitle>
         <p>
-          Near Earth Object Web Service. Credit:
-          <a href="https://github.com/SpaceRocks/">The SpaceRocks Team</a>
+          Access NASA's vast archive of exoplanet data. Credit:
+          <a
+            href="https://exoplanetarchive.ipac.caltech.edu/docs/program_interfaces.html"
+            >NASA</a
+          >
         </p>
       </template>
       <template #content>

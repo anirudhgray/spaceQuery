@@ -5,6 +5,9 @@ import UserSearch from '../views/UserSearch.vue'
 import Explore from '../views/Explore.vue'
 import MarsRoverPhotos from '../views/Externals/MarsRoverPhotos.vue'
 import AsteroidsNeoWs from '../views/Externals/AsteroidsNeoWs.vue'
+import ISSTracker from '../views/Externals/ISSTracker.vue'
+import ExoplanetsArchive from '../views/Externals/ExoplanetsArchive.vue'
+import Feedback from '../views/Feedback.vue'
 import store from '../store'
 
 const routes = [
@@ -52,6 +55,30 @@ const routes = [
     path: '/explore/external/asteroids-neows',
     name: 'AsteroidsNeoWs',
     component: AsteroidsNeoWs,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/explore/external/iss-tracker',
+    name: 'ISSTracker',
+    component: ISSTracker,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/explore/external/exoplanet-archive',
+    name: 'ExoplanetsArchive',
+    component: ExoplanetsArchive,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/feedback',
+    name: 'Feedback',
+    component: Feedback,
     meta: {
       requireLogin: true
     }

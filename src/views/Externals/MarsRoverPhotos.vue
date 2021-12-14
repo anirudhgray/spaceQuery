@@ -2,13 +2,21 @@
   <div class="grey flex flex-column">
     <Navbar></Navbar>
     <Card class="col-8 col-offset-2 my-4 px-2">
+      <template #header>
+        <router-link class="link" to="/explore/external/"
+          ><i class="pi pi-undo"></i> Back to all APIs</router-link
+        >
+      </template>
       <template #title>
         <h1>Mars Rover Photos</h1>
       </template>
       <template #subtitle>
         <p>
-          Image data gathered by NASA's Curiosity, Opportunity and Spirit rovers
-          on Mars.
+          Image data gathered by NASA's Perseverance, Curiosity, Opportunity and
+          Spirit rovers on Mars. Credit:
+          <a href="https://github.com/chrisccerami/mars-photo-api"
+            >Chris Cerami</a
+          >
         </p>
       </template>
       <template #content>

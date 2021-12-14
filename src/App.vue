@@ -49,6 +49,7 @@ h5,
 h6,
 p {
   font-weight: 400;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
 /* set up the body */
@@ -109,6 +110,13 @@ a {
 }
 .darker-card {
   background: rgb(218, 218, 218);
+}
+.link {
+  text-decoration: none;
+  color: grey;
+}
+.link:hover {
+  color: black;
 }
 
 /* remove animations for people who've turned them off */
