@@ -149,8 +149,9 @@
             />
             <Button
               v-if="bookmarked.includes(index)"
-              class="absolute right-0"
+              class="absolute right-0 p-button-success"
               icon="pi pi-check"
+              label="Added to profile"
             />
             <Button
               @click="saveResult"

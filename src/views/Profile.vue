@@ -44,7 +44,7 @@
           </template>
           <template #footer>
             <div class="grid justify-content-between">
-              <div v-if="this.$route.params.id === 'you'">
+              <div class="grid" v-if="this.$route.params.id === 'you'">
                 <Button
                   v-if="!edit"
                   class="p-button-text"
@@ -59,18 +59,23 @@
                   label="Confirm"
                   icon="pi pi-check"
                 ></Button>
+                <router-link class="py-1" to="/reset-password"
+                  ><Button
+                    class="p-button-text p-button-danger"
+                    label="Reset Password"
+                    icon="pi pi-key"
+                  ></Button
+                ></router-link>
               </div>
               <div v-if="this.$route.params.id === 'you'">
                 <Button
                   v-if="!historyToggle"
-                  class="mb-4"
                   icon="pi pi-history"
                   label="Show History"
                   @click="getHistory"
                 />
                 <Button
                   v-if="historyToggle"
-                  class="mb-4"
                   label="Hide History"
                   @click="hideHistory"
                 />
@@ -143,9 +148,22 @@
         </div>
       </div>
       <div v-else>
-        <h2 class="text-center mb-4">No saved results to see D:</h2>
+        <h2 class="text-center mb-4">
+          API Queries you make will show up here once you save some.
+        </h2>
       </div>
     </div>
+
+    <img
+      v-if="saveDisplays.length"
+      src="../assets/images/077-student-colour.svg"
+      class="col-2 col-offset-5 no-pad"
+    />
+    <img
+      v-else
+      src="../assets/images/078-student-monochrome.svg"
+      class="col-2 col-offset-5 no-pad"
+    />
     <Footer></Footer>
   </div>
 </template>
@@ -256,6 +274,7 @@ export default {
             .get(`/api/v1/saves/?search=${userid}`)
             .then(response => {
               this.saveDisplays = response.data
+              this.saveDisplays.reverse()
             })
         ])
         .catch(error => {

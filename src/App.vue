@@ -119,6 +119,15 @@ a {
   color: black;
 }
 
+.github-button {
+  background: black;
+  color: white;
+  border: none;
+}
+.github-button:hover {
+  background: rgb(39, 39, 39);
+}
+
 /* remove animations for people who've turned them off */
 @media (prefers-reduced-motion: reduce) {
   *,

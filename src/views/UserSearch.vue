@@ -1,5 +1,5 @@
 <template>
-  <div class="grey flex flex-column justify-content-between h-screen">
+  <div class="grey flex flex-column justify-content-between">
     <div>
       <Navbar></Navbar>
       <form
@@ -28,7 +28,11 @@
         </Card>
       </div>
     </div>
-    <Footer class="bottom-0"></Footer>
+    <img
+      src="../assets/images/031-drawkit-phone-conversation-colour.svg"
+      class="col-2 col-offset-5 no-pad"
+    />
+    <Footer class="block"></Footer>
   </div>
 </template>
 

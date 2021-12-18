@@ -8,6 +8,11 @@ import AsteroidsNeoWs from '../views/Externals/AsteroidsNeoWs.vue'
 import ISSTracker from '../views/Externals/ISSTracker.vue'
 import ExoplanetsArchive from '../views/Externals/ExoplanetsArchive.vue'
 import Feedback from '../views/Feedback.vue'
+import LogIn from '../views/LogIn.vue'
+import Register from '../views/Register.vue'
+import NotFound404 from '../views/NotFound404.vue'
+import ForgotPassword from '../views/ForgotPassword.vue'
+import ResetPassword from '../views/ResetPassword.vue'
 import store from '../store'
 
 const routes = [
@@ -17,6 +22,38 @@ const routes = [
     component: Home,
     meta: {
       requireLogin: false
+    }
+  },
+  {
+    path: '/login',
+    name: 'LogIn',
+    component: LogIn,
+    meta: {
+      requireLogin: false
+    }
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
+    meta: {
+      requireLogin: false
+    }
+  },
+  {
+    path: '/forgot-password',
+    name: 'ForgotPassword',
+    component: ForgotPassword,
+    meta: {
+      requireLogin: false
+    }
+  },
+  {
+    path: '/reset-password',
+    name: 'ResetPassword',
+    component: ResetPassword,
+    meta: {
+      requireLogin: true
     }
   },
   {
@@ -82,6 +119,11 @@ const routes = [
     meta: {
       requireLogin: true
     }
+  },
+  {
+    path: '/:pathMatch(.*)',
+    name: '404',
+    component: NotFound404
   }
 ]
 

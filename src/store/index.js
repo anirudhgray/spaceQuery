@@ -50,7 +50,7 @@ export default createStore({
       localStorage.removeItem('userid')
       context.commit('removeToken')
 
-      router.push('/')
+      router.push('/login')
     }
   },
   modules: {

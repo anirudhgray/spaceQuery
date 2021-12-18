@@ -6,10 +6,29 @@
       </template>
       <template #content>
         <div class="grid">
-          <p class="col">
-            A webapp to easily query NASA and other space APIs, and save the
-            results.
-          </p>
+          <div class="col">
+            <ul>
+              <li>Illustrations by/from:</li>
+              <li>
+                <a
+                  class="link"
+                  href="https://icons8.com/illustrations/author/6103782c1781404355b65f35"
+                  >Anna Yashina</a
+                >
+                from
+                <a class="link" href="https://icons8.com/illustrations"
+                  >Ouch!</a
+                >
+              </li>
+              <li><a class="link" href="https://drawkit.com/">Drawkit</a></li>
+              <li>
+                <a class="link" href="https://exoplanets.nasa.gov/">NASA</a>
+              </li>
+              <li>
+                <a class="link" href="https://www.humaaans.com/">Humaaans</a>
+              </li>
+            </ul>
+          </div>
           <div class="col">
             <ul class="mx-auto w-max">
               <li class="text-center">
@@ -49,7 +68,15 @@
             </ul>
           </div>
           <div class="col">
-            <router-link to="/feedback" class="w-max ml-auto block link">
+            <p class="text-right">
+              A webapp to easily query NASA and other space APIs, and save the
+              results.
+            </p>
+            <router-link
+              v-if="$store.state.isAuthenticated"
+              to="/feedback"
+              class="w-max ml-auto block link"
+            >
               Feedback <i class="text-3xl pi pi-info-circle"></i>
             </router-link>
             <a
