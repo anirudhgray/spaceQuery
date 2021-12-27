@@ -1,6 +1,7 @@
 <template>
   <div class="grey flex flex-column">
     <Navbar></Navbar>
+    <Skeleload v-if="pageLoad"></Skeleload>
     <Card class="col-8 col-offset-2 my-4 px-2">
       <template #header>
         <router-link class="link" to="/explore/external/"
@@ -196,6 +197,7 @@ import Calendar from 'primevue/calendar'
 import Footer from '../../components/Footer.vue'
 import InputText from 'primevue/inputtext'
 import Navbar from '../../components/Navbar.vue'
+import Skeleload from '../../components/Skeleload.vue'
 import axios from 'axios'
 
 export default {
@@ -208,7 +210,8 @@ export default {
     Navbar,
     Dropdown,
     RadioButton,
-    Calendar
+    Calendar,
+    Skeleload
   },
   data () {
     return {
@@ -225,10 +228,12 @@ export default {
       index: 0,
       roverInfoDisplay: null,
       loading: false,
-      bookmarked: []
+      bookmarked: [],
+      pageLoad: false
     }
   },
   mounted () {
+    this.pageLoad = true
     this.getRovers()
   },
   methods: {
@@ -295,6 +300,7 @@ export default {
           this.rover = this.roverDetails[3]
           this.cameraList = this.rover.cameras
         })
+      this.pageLoad = false
     },
     selectRover () {
       for (let i = 0; i < this.roverDetails.length; i++) {

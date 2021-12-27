@@ -40,7 +40,7 @@ export default createStore({
   actions: {
     async logout (context) {
       await axios
-        .get('/api/v1/users/logout/')
+        .get('/api/v1/users/actions/logout/')
         .catch(error => {
           console.log(JSON.stringify(error))
         })

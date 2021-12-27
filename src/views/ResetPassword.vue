@@ -119,10 +119,13 @@ export default {
     }
   },
   methods: {
-    resetForm () {
+    async resetForm () {
       this.errors = []
       this.success = false
 
+      if (!this.$store.state.isAuthenticated) {
+        this.errors.push('You are not logged in.')
+      }
       if (this.oldPass === '') {
         this.errors.push('The old password is missing.')
       }
@@ -134,10 +137,22 @@ export default {
       }
 
       if (!this.errors.length) {
-        this.success = true
-        this.oldPass = ''
-        this.newPass = ''
-        this.newPassRep = ''
+        const resetData = { oldPass: this.oldPass, newPass: this.newPass }
+        await axios
+          .post('/api/v1/users/actions/reset/', resetData)
+          .then(response => {
+            this.success = true
+            this.oldPass = ''
+            this.newPass = ''
+            this.newPassRep = ''
+          })
+          .catch(error => {
+            if (error.response) {
+              this.errors.push(error.response.data)
+            } else if (error.message) {
+              this.errors.push('Something went wrong.' + error)
+            }
+          })
       }
     }
   }

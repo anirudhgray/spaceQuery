@@ -77,6 +77,12 @@ select {
   font: inherit;
 }
 
+.light-theme {
+  ---background: rgb(247, 247, 247);
+  ---card-color: white;
+  ---text: black;
+}
+
 .grey {
   background: rgb(247, 247, 247);
 }

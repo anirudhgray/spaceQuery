@@ -9,12 +9,7 @@
         class="m-2 px-2 -pb-1 result-card"
       >
         <template #header>
-          <Image
-            :alt="api.name"
-            :src="api.image"
-            class="card-header-imgs"
-            preview
-          />
+          <Image :alt="api.name" :src="api.image" preview />
         </template>
         <template #title>
           <router-link class="link" :to="'/explore/external/' + api.url_name">{{

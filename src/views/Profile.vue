@@ -1,6 +1,7 @@
 <template>
   <div class="grey flex flex-column">
     <Navbar></Navbar>
+    <Skeleload v-if="pageLoad"></Skeleload>
     <div class="h-auto overflow-auto">
       <form @submit.prevent="confirmEdit($store.state.user.id)">
         <Card class="m-4">
@@ -10,8 +11,11 @@
                 <Avatar
                   class="w-14rem h-14rem"
                   size="xlarge"
-                  icon="pi pi-user"
-                ></Avatar>
+                  :icon="avatarIcon"
+                  @mouseenter="changeIconHover"
+                  @mouseleave="changeIconHover"
+                  ><SpeedDial v-if="edit" :model="items"
+                /></Avatar>
               </div>
               <div class="col-5">
                 <h1>{{ email }}</h1>
@@ -148,8 +152,11 @@
         </div>
       </div>
       <div v-else>
-        <h2 class="text-center mb-4">
+        <h2 v-if="this.$route.params.id === 'you'" class="text-center mb-4">
           API Queries you make will show up here once you save some.
+        </h2>
+        <h2 v-else class="text-center mb-4">
+          This user has not saved any results yet.
         </h2>
       </div>
     </div>
@@ -176,6 +183,8 @@ import InputText from 'primevue/inputtext'
 import Navbar from '../components/Navbar.vue'
 import Avatar from 'primevue/avatar'
 import Image from 'primevue/image'
+import Skeleload from '../components/Skeleload.vue'
+import SpeedDial from 'primevue/speeddial'
 import axios from 'axios'
 
 export default {
@@ -193,7 +202,9 @@ export default {
       saveDisplays: [],
       historyDisplays: [],
       historyToggle: false,
-      historyLoad: false
+      historyLoad: false,
+      pageLoad: false,
+      avatarIcon: 'pi pi-user'
     }
   },
   components: {
@@ -203,9 +214,12 @@ export default {
     InputText,
     Navbar,
     Avatar,
-    Image
+    Image,
+    Skeleload,
+    SpeedDial
   },
   mounted () {
+    this.pageLoad = true
     if (this.$route.params.id === 'you') {
       this.fetchProfile(this.$store.state.user.id)
     } else {
@@ -213,6 +227,20 @@ export default {
     }
   },
   methods: {
+    changeIconHover () {
+      if (this.edit) {
+        if (this.avatarIcon === 'pi pi-user') {
+          document.documentElement.style.cursor = 'pointer'
+          this.avatarIcon = 'pi pi-pencil'
+        } else {
+          document.documentElement.style.cursor = 'auto'
+          this.avatarIcon = 'pi pi-user'
+        }
+      }
+    },
+    changeIconClick () {
+      if (this.edit) {}
+    },
     hideHistory () {
       this.historyToggle = false
     },
@@ -280,6 +308,7 @@ export default {
         .catch(error => {
           console.log(JSON.stringify(error))
         })
+      this.pageLoad = false
     }
   }
 }
