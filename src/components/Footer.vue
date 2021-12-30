@@ -20,6 +20,7 @@
                   >Ouch!</a
                 >
               </li>
+              <li><a href="https://icons8.com">Icons8</a></li>
               <li><a class="link" href="https://drawkit.com/">Drawkit</a></li>
               <li>
                 <a class="link" href="https://exoplanets.nasa.gov/">NASA</a>

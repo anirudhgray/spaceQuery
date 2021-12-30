@@ -14,7 +14,7 @@
           <router-link to="/login"
             ><Button class="mx-2" label="Log in"
           /></router-link>
-          <Button class="mx-2" label="Learn more" />
+          <Button class="mx-2" label="Learn more" @click="scrollAbout" />
           <a href="https://github.com/anirudhgray/space-front"
             ><Button class="mx-2" label="Github"
           /></a>
@@ -23,35 +23,98 @@
       </div>
     </div>
 
-    <div class="h-auto overflow-auto">
+    <div class="h-auto overflow-auto" ref="about">
       <Card class="col-8 col-offset-2 mb-4 h-auto text-center p-5">
         <template #title>
           <h2>So, how does this work?</h2>
         </template>
         <template #subtitle>
-          <p>Very well, then.</p>
+          <p>Figure it out. Nah, I'm kidding.</p>
         </template>
         <template #content>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Pellentesque id cursus tortor. Donec congue lobortis ante, nec
-            maximus ex faucibus vitae. Nunc nec sodales risus. Curabitur
-            volutpat, erat eu facilisis scelerisque, metus turpis iaculis erat,
-            vel egestas dolor nisl at lorem. Donec id quam tellus.
+            At its core, this webapp acts as a frontend for querying a bunch of
+            awesome space related APIs (more info below). It doesn't sound
+            nearly as awesome now that I have written it down, but yeah. Why do
+            I need to be logged in, you ask? Well, I've added some nifty
+            functionality which allows you to save any query results that you
+            particularly like to your user profile for later reference — can't
+            do that without having you signed in. This also allows you to look
+            up other users and look at their saved posts. I'm not entirely sure
+            why I added this, and what purpose it serves, but it's there.
+            ¯\(°_o)/¯
           </p>
-          <img
-            class="my-4 col-8 col-offset-2"
-            src="https://picsum.photos/600/400"
-          />
-          <p>
-            Donec imperdiet lacinia erat, non sodales erat posuere placerat.
-            Class aptent taciti sociosqu ad litora torquent per conubia nostra,
-            per inceptos himenaeos. Nullam urna quam, cursus in ultrices ut,
-            vulputate non ex.
-          </p>
+          <div class="my-4 col-8 col-offset-2">
+            <img src="https://picsum.photos/600/400" />
+            <p>
+              Here's a random image. I should probably add something useful
+              here.
+            </p>
+          </div>
+          <p>Anyway. The flow is pretty simple:</p>
+          <div class="grid">
+            <p class="col-4 text-6xl text-right">1</p>
+            <p class="col-8 m-auto text-left">
+              <router-link to="/login">Log in</router-link> in or
+              <router-link to="/register">register</router-link>.
+            </p>
+          </div>
+          <div class="grid">
+            <p class="col-8 m-auto text-right">
+              Head over to the Explore page from the navbar.
+            </p>
+            <p class="col-4 text-6xl text-left">2</p>
+          </div>
+          <div class="grid">
+            <p class="col-4 text-6xl text-right">3</p>
+            <p class="col-8 m-auto text-left">
+              Select whichever API tickles your fancy.
+            </p>
+          </div>
+          <div class="grid">
+            <p class="col-8 m-auto text-right">Enter the query paramters.</p>
+            <p class="col-4 text-6xl text-left">4</p>
+          </div>
+          <div class="grid">
+            <p class="col-4 text-6xl text-right">5</p>
+            <p class="col-8 m-auto text-left">buttonbuttonbutton.</p>
+          </div>
+          <div class="grid">
+            <p class="col-8 m-auto text-right">Await great knowledge.</p>
+            <p class="col-4 text-6xl text-left">6</p>
+          </div>
         </template>
         <template #footer>
-          <p>A-ha!</p>
+          <p>
+            Enjoy, and let me know what you think (feedback link in the footer).
+          </p>
+        </template>
+      </Card>
+      <Card class="col-8 col-offset-2 mb-4 h-auto text-center -p-3 pt-5">
+        <template #title> APIs available </template>
+        <template #footer>
+          <div class="grid">
+            <div class="col h-15rem" v-for="(api, index) in apis" :key="index">
+              <div
+                class="h-full"
+                @mouseenter="toggleAPI(index)"
+                v-show="!api.visible"
+              >
+                <p class="text-6xl">
+                  {{ api.letter }}
+                </p>
+              </div>
+              <div
+                class="h-full"
+                @mouseleave="toggleAPI(index)"
+                v-show="api.visible"
+              >
+                <p class="text-6xl" :style="color">{{ api.letter }}</p>
+                <p class="text-2xl">{{ api.name }}</p>
+                <img :src="api.imgsrc" class="w-min m-auto mt-5" />
+              </div>
+            </div>
+          </div>
         </template>
       </Card>
     </div>
@@ -81,6 +144,51 @@ export default {
     Card,
     Button,
     Footer
+  },
+  data () {
+    return {
+      apis: [
+        {
+          letter: 'A',
+          name: 'Asteroids',
+          visible: false,
+          imgsrc: require('@/assets/images/icons8-asteroid-64.png')
+        },
+        {
+          letter: 'I',
+          name: 'ISS',
+          visible: false,
+          imgsrc: require('@/assets/images/icons8-space-station-64.png')
+        },
+        {
+          letter: 'M',
+          name: 'Mars',
+          visible: false,
+          imgsrc: require('@/assets/images/icons8-mars-60.png')
+        },
+        {
+          letter: 'E',
+          name: 'Exoplanets',
+          visible: false,
+          imgsrc: require('@/assets/images/icons8-radar-64.png')
+        }
+      ]
+    }
+  },
+  methods: {
+    toggleAPI (index) {
+      for (let i = 0; i < this.apis.length; i++) {
+        if (i === index) {
+          this.apis[index].visible = !this.apis[index].visible
+        } else {
+          this.apis[i].visible = false
+        }
+      }
+    },
+    scrollAbout () {
+      console.log(this.$refs.about)
+      this.$refs.about.scrollIntoView({ behavior: 'smooth' })
+    }
   }
 }
 </script>
