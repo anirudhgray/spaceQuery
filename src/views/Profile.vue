@@ -7,15 +7,16 @@
         <Card class="m-4">
           <template #content>
             <div class="grid">
-              <div class="col-3">
-                <Avatar
-                  class="w-14rem h-14rem"
-                  size="xlarge"
-                  :icon="avatarIcon"
-                  @mouseenter="changeIconHover"
-                  @mouseleave="changeIconHover"
-                  ><SpeedDial v-if="edit" :model="items"
-                /></Avatar>
+              <div class="col-3 relative">
+                <Button
+                  class="absolute bottom-0 left-50"
+                  icon="pi pi-refresh"
+                  v-if="edit"
+                  @click="changeAvatar"
+                >
+                </Button>
+                <Avatar class="w-14rem h-14rem" size="xlarge" :image="pfp">
+                </Avatar>
               </div>
               <div class="col-5">
                 <h1>{{ email }}</h1>
@@ -184,7 +185,6 @@ import Navbar from '../components/Navbar.vue'
 import Avatar from 'primevue/avatar'
 import Image from 'primevue/image'
 import Skeleload from '../components/Skeleload.vue'
-import SpeedDial from 'primevue/speeddial'
 import axios from 'axios'
 
 export default {
@@ -204,7 +204,19 @@ export default {
       historyToggle: false,
       historyLoad: false,
       pageLoad: false,
-      avatarIcon: 'pi pi-user'
+      selectedAvatar: '',
+      avatarList: [
+        'default',
+        'boy_black_specs',
+        'boy_black_stache',
+        'boy_white_earphones_hoodie',
+        'boy_white_futuristic_brown',
+        'girl_black_earrings',
+        'girl_black_mask',
+        'girl_white_green',
+        'girl_white'
+      ],
+      avatarIndex: 0
     }
   },
   components: {
@@ -215,8 +227,7 @@ export default {
     Navbar,
     Avatar,
     Image,
-    Skeleload,
-    SpeedDial
+    Skeleload
   },
   mounted () {
     this.pageLoad = true
@@ -227,19 +238,11 @@ export default {
     }
   },
   methods: {
-    changeIconHover () {
-      if (this.edit) {
-        if (this.avatarIcon === 'pi pi-user') {
-          document.documentElement.style.cursor = 'pointer'
-          this.avatarIcon = 'pi pi-pencil'
-        } else {
-          document.documentElement.style.cursor = 'auto'
-          this.avatarIcon = 'pi pi-user'
-        }
-      }
-    },
-    changeIconClick () {
-      if (this.edit) {}
+    changeAvatar () {
+      this.avatarIndex++
+      this.avatarIndex %= 9
+      this.selectedAvatar = this.avatarList[this.avatarIndex]
+      this.pfp = require('@/assets/images/avatars/' + this.selectedAvatar + '.png')
     },
     hideHistory () {
       this.historyToggle = false
@@ -274,7 +277,7 @@ export default {
     },
     async confirmEdit (userid) {
       await axios
-        .patch(`/api/v1/users/profiles/${userid}/`, { first_name: this.firstname, last_name: this.lastname, github_username: this.github })
+        .patch(`/api/v1/users/profiles/${userid}/`, { avatar: this.selectedAvatar, first_name: this.firstname, last_name: this.lastname, github_username: this.github })
         .then(() => {
           this.toggleEdit()
         })
@@ -295,6 +298,7 @@ export default {
               if (response.data.github_username !== '') {
                 this.github = response.data.github_username
               }
+              this.pfp = require('@/assets/images/avatars/' + response.data.avatar + '.png')
               this.saved = response.data.saved_results
               this.queries = response.data.queries_made
             }),

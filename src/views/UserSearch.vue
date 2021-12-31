@@ -21,7 +21,11 @@
         >
           <template #content>
             <div class="grid -mb-2">
-              <Avatar icon="pi pi-user"></Avatar>
+              <Avatar
+                :image="
+                  require('@/assets/images/avatars/' + user.avatar + '.png')
+                "
+              ></Avatar>
               <p class="ml-2">{{ user.email }}</p>
             </div>
           </template>
