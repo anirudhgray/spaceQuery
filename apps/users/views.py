@@ -7,6 +7,7 @@ from .permissions import IsUserAccess, IsProfileAccess, CanPost
 from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView
 from rest_framework.authentication import TokenAuthentication
+from django.http import HttpResponseBadRequest
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -35,6 +36,20 @@ class User_logout(GenericAPIView):
     def get(self, request, format=None):
         request.user.auth_token.delete()
         return Response("Logged out.")
+
+
+class Reset_password(GenericAPIView):
+    permission_classes = [(IsAuthenticated)]
+
+    def post(self, request, format=None):
+        user = get_user_model().objects.filter(id=request.user.id).first()
+        old_password = request.data.get("oldPass")
+        new_password = request.data.get("newPass")
+        if user.check_password(old_password):
+            user.set_password(new_password)
+            user.save()
+            return Response("Password reset successfully.")
+        return HttpResponseBadRequest("Old password incorrect.")
 
 
 class MeViewSet(viewsets.ModelViewSet):

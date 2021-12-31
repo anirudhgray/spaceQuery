@@ -17,6 +17,12 @@ class SaveViewSet(viewsets.ModelViewSet):
         profile.saved_results = len(Save.objects.filter(user=self.request.user))
         profile.save()
 
+    def perform_destroy(self, instance):
+        super().perform_destroy(instance)
+        profile = UserProfile.objects.get(user=self.request.user)
+        profile.saved_results = len(Save.objects.filter(user=self.request.user))
+        profile.save()
+
     def get_queryset(self):
         queryset = Save.objects.all()
         search = self.request.query_params.get('search')

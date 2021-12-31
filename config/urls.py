@@ -22,5 +22,5 @@ urlpatterns = [
         title="School Service",
         description="API developers hoping to use our service"
     ), name='openapi-schema'),
-    path('api/v1/users/logout/', include(users.urls))
+    path('api/v1/users/actions/', include(users.urls))
 ]

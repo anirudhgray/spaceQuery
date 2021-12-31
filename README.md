@@ -1,3 +1,11 @@
+After login, send a get request to the profiles endpoint. Filter for the logged in user.
+Return user id and "new" field value. If "new" is True, ask for Profile information. Otherwise continue directly to the profile.
+
+NOTES: Should have just used djoser...
+Had some issues with token in browser cache.
+Add docstrings
+Make it possible to handle large number of results in the user query.
+
 # API
 
 **/api/v1/users/auths**
