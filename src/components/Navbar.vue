@@ -1,7 +1,13 @@
 <template>
-  <div class="grid justify-content-between mt-4 mx-4">
+  <router-link class="r-900-vis landing-link mx-auto" to="/"
+    >spaceQuery</router-link
+  >
+  <Button icon="pi pi-bars" class="r-700-vis mx-auto mt-4"></Button>
+  <div class="r-700-invis grid justify-content-between mt-4 mx-4">
     <nav class="grid align-items-center">
-      <router-link class="landing-link mx-2" to="/">spaceQuery</router-link>
+      <router-link class="r-900-invis landing-link mx-2" to="/"
+        >spaceQuery</router-link
+      >
       <p
         class="paralink navlink mx-2"
         to="/explore/external"

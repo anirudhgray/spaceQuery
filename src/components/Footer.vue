@@ -5,11 +5,11 @@
         <h3 class="text-center">spaceQuery</h3>
       </template>
       <template #content>
-        <div class="grid">
+        <div class="grid grid-no-gutter">
           <div class="col">
             <ul>
-              <li>Illustrations by/from:</li>
-              <li>
+              <li class="w-max mr-auto">Illustrations by/from:</li>
+              <li class="w-max mr-auto">
                 <a
                   class="link"
                   href="https://icons8.com/illustrations/author/6103782c1781404355b65f35"
@@ -20,46 +20,50 @@
                   >Ouch!</a
                 >
               </li>
-              <li><a href="https://icons8.com">Icons8</a></li>
-              <li><a class="link" href="https://drawkit.com/">Drawkit</a></li>
-              <li>
+              <li class="w-max mr-auto">
+                <a href="https://icons8.com">Icons8</a>
+              </li>
+              <li class="w-max mr-auto">
+                <a class="link" href="https://drawkit.com/">Drawkit</a>
+              </li>
+              <li class="w-max mr-auto">
                 <a class="link" href="https://exoplanets.nasa.gov/">NASA</a>
               </li>
-              <li>
+              <li class="w-max mr-auto">
                 <a class="link" href="https://www.humaaans.com/">Humaaans</a>
               </li>
             </ul>
           </div>
           <div class="col">
-            <ul class="mx-auto w-max">
-              <li class="text-center">
+            <ul class="mx-auto w-max text-center">
+              <li class="w-max mx-auto">
                 <a class="link" href="https://api.nasa.gov/">NASA Open APIs</a>
               </li>
-              <li class="text-center">
+              <li class="w-max mx-auto">
                 <a
                   class="link"
                   href="https://developers.google.com/earth-engine/"
                   >Google Earth Engine</a
                 >
               </li>
-              <li class="text-center">
+              <li class="w-max mx-auto">
                 <a class="link" href="https://github.com/open-notify"
                   >Where is the ISS?</a
                 >
               </li>
-              <li class="text-center">
+              <li class="w-max mx-auto">
                 <a class="link" href="https://github.com/SpaceRocks/"
                   >SpaceRocks</a
                 >
               </li>
-              <li class="text-center">
+              <li class="w-max mx-auto">
                 <a
                   class="link"
                   href="https://github.com/chrisccerami/mars-photo-api"
                   >Mars Rover Photo API</a
                 >
               </li>
-              <li class="text-center">
+              <li class="w-max mx-auto">
                 <a
                   class="link"
                   href="https://exoplanetarchive.ipac.caltech.edu/docs/program_interfaces.html"
@@ -101,7 +105,6 @@
     </Card>
   </div>
 </template>
-
 <script>
 import Card from 'primevue/card'
 

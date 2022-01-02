@@ -6,21 +6,21 @@
     <Card class="m-4 px-2">
       <template #content>
         <div class="grid">
-          <div class="col-4">
+          <div class="r-700-invis lg:col-4 md:col-6">
             <img src="../assets/images/zombie_psr.jpg" />
           </div>
-          <div class="col-4 col-offset-2 flex relative">
-            <router-link to="/"
-              ><Button
-                class="absolute top-0 mt-8 p-button-text p-button-rounded"
-                icon="pi pi-undo"
-              ></Button
-            ></router-link>
+          <div class="md:col-4 lg:col-offset-2 md:col-offset-1 col-12 flex">
             <form
               class="flex flex-column my-auto w-full"
               @submit.prevent="submitRegisterForm"
             >
-              <div class="field align-self-end">
+              <div class="field flex justify-content-between">
+                <router-link to="/"
+                  ><Button
+                    class="p-button-text p-button-rounded"
+                    icon="pi pi-undo"
+                  ></Button
+                ></router-link>
                 <h1>Register</h1>
               </div>
 

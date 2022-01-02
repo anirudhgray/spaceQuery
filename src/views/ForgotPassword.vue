@@ -6,19 +6,22 @@
     <Card class="m-4 px-2">
       <template #content>
         <div class="grid">
-          <div class="col-4">
+          <div class="r-700-invis lg:col-4 md:col-6">
             <img src="../assets/images/flares_of_fury.jpg" />
           </div>
-          <div class="col-4 col-offset-2 flex relative">
-            <router-link to="/login"
-              ><Button
-                class="absolute top-0 mt-8 p-button-text p-button-rounded"
-                icon="pi pi-undo"
-                label="Back to login"
-              ></Button
-            ></router-link>
-            <form class="flex flex-column my-auto w-full">
-              <div class="field align-self-end">
+          <div class="md:col-4 lg:col-offset-2 md:col-offset-1 col-12 flex">
+            <form
+              @submit.prevent="forgot"
+              class="flex flex-column my-auto w-full"
+            >
+              <div class="field flex justify-content-between">
+                <router-link to="/login"
+                  ><Button
+                    class="p-button-text p-button-rounded"
+                    icon="pi pi-undo"
+                    label="Back to login"
+                  ></Button
+                ></router-link>
                 <h1>Forgot Password</h1>
               </div>
 
@@ -98,6 +101,22 @@ export default {
         console.log('ok')
         this.$router.push({ path: '/user/you' })
       }
+    },
+    async forgot () {
+      const forgotData = { email: this.email }
+      await axios
+        .post('/api/v1/users/actions/forgot/', forgotData)
+        .then(response => {
+          this.success = true
+          this.email = ''
+        })
+        .catch(error => {
+          if (error.response) {
+            this.errors.push(error.response.data)
+          } else if (error.message) {
+            this.errors.push('Something went wrong.' + error)
+          }
+        })
     }
   }
 }

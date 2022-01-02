@@ -133,7 +133,12 @@ a {
 .github-button:hover {
   background: rgb(39, 39, 39);
 }
-
+.r-900-vis {
+  display: none;
+}
+.r-700-vis {
+  display: none;
+}
 /* remove animations for people who've turned them off */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -143,6 +148,22 @@ a {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+@media (max-width: 900px) {
+  .r-900-vis {
+    display: block;
+  }
+  .r-900-invis {
+    display: none;
+  }
+}
+@media (max-width: 700px) {
+  .r-700-vis {
+    display: block;
+  }
+  .r-700-invis {
+    display: none;
   }
 }
 </style>

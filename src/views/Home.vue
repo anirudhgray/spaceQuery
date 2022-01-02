@@ -8,7 +8,7 @@
         align-items-center
       "
     >
-      <h1 class="text-8xl text-center">spaceQuery</h1>
+      <h1 class="md:text-8xl text-5xl text-center">spaceQuery</h1>
       <div class="flex flex-column align-items-center">
         <div class="grid">
           <router-link to="/login"
@@ -24,7 +24,7 @@
     </div>
 
     <div class="h-auto overflow-auto" ref="about">
-      <Card class="col-8 col-offset-2 mb-4 h-auto text-center p-5">
+      <Card class="md:col-8 md:col-offset-2 mb-4 h-auto text-center md:p-5 p-1">
         <template #title>
           <h2>So, how does this work?</h2>
         </template>
@@ -90,7 +90,7 @@
           </p>
         </template>
       </Card>
-      <Card class="col-8 col-offset-2 mb-4 h-auto text-center -p-3 pt-5">
+      <Card class="md:col-8 md:col-offset-2 mb-4 h-auto text-center -p-3 pt-5">
         <template #title> APIs available </template>
         <template #footer>
           <div class="grid">
@@ -110,7 +110,7 @@
                 v-show="api.visible"
               >
                 <p class="text-6xl" :style="color">{{ api.letter }}</p>
-                <p class="text-2xl">{{ api.name }}</p>
+                <p class="md:text-2xl text-xl">{{ api.name }}</p>
                 <img :src="api.imgsrc" class="w-min m-auto mt-5" />
               </div>
             </div>
@@ -122,7 +122,7 @@
     <div class="h-auto mb-4 overflow-auto flex flex-column">
       <img
         src="../assets/images/space-coming-soon.png"
-        class="col-4 col-offset-4 no-pad"
+        class="md:col-4 md:col-offset-4 no-pad"
       />
       <router-link class="mx-auto" to="/login"
         ><Button label="Get Started"></Button

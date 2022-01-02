@@ -48,7 +48,8 @@
                 <Slider name="slider" v-model="rate" :step="10" required />
               </div>
               <div class="field">
-                <Button type="submit" label="Submit" />
+                <Button v-if="!success" type="submit" label="Submit" />
+                <Button v-else icon="pi pi-check" class="p-button-success" />
               </div>
             </form>
           </div>
@@ -71,6 +72,7 @@ import Textarea from 'primevue/textarea'
 import Dropdown from 'primevue/dropdown'
 import Button from 'primevue/button'
 import Slider from 'primevue/slider'
+import axios from 'axios'
 
 export default {
   name: 'AsteroidsNeoWs',
@@ -96,14 +98,31 @@ export default {
       rate: 0,
       email: this.$store.state.user.email,
       category: null,
-      desc: null
+      desc: null,
+      errors: [],
+      success: false
     }
   },
   methods: {
-    submit () {
-      this.rate = 0
-      this.category = null
-      this.desc = null
+    async submit () {
+      if (!this.errors.length) {
+        const data = { email: this.email, rate: this.rate, category: this.category, desc: this.desc }
+        await axios
+          .post('/api/v1/users/actions/feedback/', data)
+          .then(response => {
+            this.success = true
+            this.rate = 0
+            this.category = null
+            this.desc = null
+          })
+          .catch(error => {
+            if (error.response) {
+              this.errors.push(error.response.data)
+            } else if (error.message) {
+              this.errors.push('Something went wrong.' + error)
+            }
+          })
+      }
     }
   }
 }

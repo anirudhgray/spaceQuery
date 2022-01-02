@@ -6,22 +6,22 @@
     <Card class="m-4 px-2">
       <template #content>
         <div class="grid">
-          <div class="col-4">
+          <div class="r-700-invis lg:col-4 md:col-6">
             <img src="../assets/images/roasted_planet.jpg" />
           </div>
-          <div class="col-4 col-offset-2 flex relative">
-            <router-link to="/user/you"
-              ><Button
-                class="absolute top-0 mt-8 p-button-text p-button-rounded"
-                icon="pi pi-undo"
-                label="Back to profile"
-              ></Button
-            ></router-link>
+          <div class="md:col-4 lg:col-offset-2 md:col-offset-1 col-12 flex">
             <form
               class="flex flex-column my-auto w-full"
               @submit.prevent="resetForm"
             >
-              <div class="field align-self-end">
+              <div class="field flex justify-content-between">
+                <router-link to="/user/you"
+                  ><Button
+                    class="p-button-text p-button-rounded"
+                    icon="pi pi-undo"
+                    label="Back to profile"
+                  ></Button
+                ></router-link>
                 <h1>Reset Password</h1>
               </div>
 
@@ -67,7 +67,7 @@
             </form>
 
             <Message
-              class="absolute bottom-0 right-0 left-0"
+              class="absolute bottom-0 right-0"
               :closable="false"
               severity="error"
               v-if="errors.length"
@@ -76,7 +76,7 @@
             </Message>
 
             <Message
-              class="absolute bottom-0 right-0 left-0"
+              class="absolute bottom-0 right-0"
               :closable="false"
               severity="success"
               v-if="success"
