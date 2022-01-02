@@ -69,7 +69,7 @@ class UserProfile(models.Model):
     first_name = models.CharField(max_length=100, blank=True, null=True)
     last_name = models.CharField(max_length=100, blank=True, null=True)
     github_username = models.CharField(max_length=100, blank=True, null=True)
-    image = models.ImageField(upload_to='profile-image', blank=True, null=True)
+    avatar = models.CharField(max_length=255, blank=True, null=True, default='default')
     saved_results = models.IntegerField(default=0)
     queries_made = models.IntegerField(default=0)
 

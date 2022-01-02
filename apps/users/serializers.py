@@ -20,7 +20,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
         fields = ('url', 'user', 'email', 'first_name', 'last_name',
-                  'github_username', 'image', 'saved_results', 'queries_made')
+                  'github_username', 'avatar', 'saved_results', 'queries_made')
         extra_kwargs = {'user': {'read_only': True}, 'saved_results': {
             'read_only': True}, 'queries_made': {'read_only': True}}
 

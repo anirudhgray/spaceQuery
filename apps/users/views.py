@@ -1,3 +1,4 @@
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import viewsets
 from django.contrib.auth import get_user_model
 from rest_framework.permissions import IsAuthenticated
@@ -8,6 +9,41 @@ from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView
 from rest_framework.authentication import TokenAuthentication
 from django.http import HttpResponseBadRequest
+from django.core.mail import send_mail as sm
+from rest_framework.decorators import api_view, renderer_classes
+from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
+
+
+@csrf_exempt
+@api_view(('POST',))
+@renderer_classes((TemplateHTMLRenderer, JSONRenderer))
+def forgot_pwd(request):
+    res = sm(
+        subject='Subject here',
+        message='Here is the message.',
+        from_email='mail@gmail.com',
+        recipient_list=[request.data.get("email")],
+        fail_silently=False,
+    )
+
+    return Response(f"Sent {res}")
+
+
+@csrf_exempt
+@api_view(('POST',))
+@renderer_classes((TemplateHTMLRenderer, JSONRenderer))
+def feedback(request):
+    res = sm(
+        subject=request.data.get("email"),
+        message=f'''Rating: {request.data.get("rate")},
+        Category: {request.data.get("category")},
+        Description: {request.data.get("desc")}''',
+        from_email='mail@gmail.com',
+        recipient_list=['spacequerywebapp@gmail.com'],
+        fail_silently=False,
+    )
+
+    return Response(f"Sent {res}")
 
 
 class UserViewSet(viewsets.ModelViewSet):
