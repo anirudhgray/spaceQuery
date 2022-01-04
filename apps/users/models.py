@@ -75,3 +75,13 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}, {self.user.email}'
+
+
+class ForgotPasswordRequests(models.Model):
+    id = models.CharField(max_length=16, primary_key=True)
+    user = models.TextField()
+    time = models.DateTimeField(auto_now_add=True)
+    token_hash = models.TextField()
+
+    def __str__(self):
+        return f"{self.user} at {self.time}"
