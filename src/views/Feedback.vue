@@ -59,6 +59,14 @@
         </div>
       </template>
     </Card>
+    <Message
+      class="absolute bottom-0 right-0"
+      :closable="false"
+      severity="success"
+      v-if="success"
+    >
+      Your feedback has been submitted successfully.
+    </Message>
     <Footer></Footer>
   </div>
 </template>
@@ -73,6 +81,7 @@ import Dropdown from 'primevue/dropdown'
 import Button from 'primevue/button'
 import Slider from 'primevue/slider'
 import axios from 'axios'
+import Message from 'primevue/message'
 
 export default {
   name: 'AsteroidsNeoWs',
@@ -84,7 +93,8 @@ export default {
     Textarea,
     Dropdown,
     Button,
-    Slider
+    Slider,
+    Message
   },
   data () {
     return {
@@ -107,14 +117,12 @@ export default {
     async submit () {
       if (!this.errors.length) {
         const data = { email: this.email, rate: this.rate, category: this.category, desc: this.desc }
+        this.success = true
+        this.rate = 0
+        this.category = null
+        this.desc = null
         await axios
           .post('/api/v1/users/actions/feedback/', data)
-          .then(response => {
-            this.success = true
-            this.rate = 0
-            this.category = null
-            this.desc = null
-          })
           .catch(error => {
             if (error.response) {
               this.errors.push(error.response.data)

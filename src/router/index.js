@@ -13,6 +13,7 @@ import Register from '../views/Register.vue'
 import NotFound404 from '../views/NotFound404.vue'
 import ForgotPassword from '../views/ForgotPassword.vue'
 import ResetPassword from '../views/ResetPassword.vue'
+import ForgotReset from '../views/ForgotReset.vue'
 import store from '../store'
 
 const routes = [
@@ -44,6 +45,14 @@ const routes = [
     path: '/forgot-password',
     name: 'ForgotPassword',
     component: ForgotPassword,
+    meta: {
+      requireLogin: false
+    }
+  },
+  {
+    path: '/forgot-reset',
+    name: 'ForgotReset',
+    component: ForgotReset,
     meta: {
       requireLogin: false
     }

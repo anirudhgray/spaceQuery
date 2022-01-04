@@ -3,6 +3,7 @@
     <router-link class="landing-link w-min ml-4 mt-3" to="/"
       >spaceQuery</router-link
     >
+    <Skeleload v-if="loading"></Skeleload>
     <Card class="m-4 px-2">
       <template #content>
         <div class="grid">
@@ -15,26 +16,7 @@
               @submit.prevent="resetForm"
             >
               <div class="field flex justify-content-between">
-                <router-link to="/user/you"
-                  ><Button
-                    class="p-button-text p-button-rounded"
-                    icon="pi pi-undo"
-                    label="Back to profile"
-                  ></Button
-                ></router-link>
                 <h1>Reset Password</h1>
-              </div>
-
-              <div class="field">
-                <Password
-                  v-model="oldPass"
-                  class="inputfield w-full"
-                  inputClass="inputfield
-                w-full"
-                  toggleMask
-                  :feedback="false"
-                  placeholder="Old Password"
-                />
               </div>
 
               <div class="field">
@@ -81,7 +63,10 @@
               severity="success"
               v-if="success"
             >
-              <p>Your password has been reset successfully.</p>
+              <p>
+                Your password has been reset successfully. Please
+                <router-link to="/login">log in</router-link>
+              </p>
             </Message>
           </div>
         </div>
@@ -94,6 +79,7 @@
 <script>
 import Card from 'primevue/card'
 import Footer from '../components/Footer.vue'
+import Skeleload from '../components/Skeleload.vue'
 import Password from 'primevue/password'
 import Button from 'primevue/button'
 import Message from 'primevue/message'
@@ -107,42 +93,50 @@ export default {
     Card,
     Password,
     Button,
-    Message
+    Message,
+    Skeleload
   },
   data () {
     return {
-      oldPass: '',
       newPass: '',
       newPassRep: '',
       errors: [],
-      success: false
+      success: false,
+      id: '',
+      token: '',
+      loading: false
     }
   },
+  mounted () {
+    const urlParams = new URLSearchParams(window.location.search)
+    this.id = urlParams.get('ID')
+    this.token = urlParams.get('token')
+    this.checkValidity()
+  },
   methods: {
+    checkValidity () {
+      if (!this.id | !this.token) {
+        this.$router.push('/')
+      } else if (this.id.length !== 16 | this.token.length !== 16) {
+        this.$router.push('/')
+      }
+    },
     async resetForm () {
       this.errors = []
       this.success = false
 
-      if (!this.$store.state.isAuthenticated) {
-        this.errors.push('You are not logged in.')
-      }
-      if (this.oldPass === '') {
-        this.errors.push('The old password is missing.')
-      }
       if (this.newPass.length < 8) {
         this.errors.push('The new password is too short.')
       }
       if (this.newPass !== this.newPassRep) {
         this.errors.push('The new passwords do not match.')
       }
-
       if (!this.errors.length) {
-        const resetData = { oldPass: this.oldPass, newPass: this.newPass }
+        const resetData = { newPass: this.newPass, id: this.id, token: this.token }
         await axios
-          .post('/api/v1/users/actions/reset/', resetData)
+          .post('/api/v1/users/actions/token-check/', resetData)
           .then(response => {
             this.success = true
-            this.oldPass = ''
             this.newPass = ''
             this.newPassRep = ''
           })

@@ -18,6 +18,10 @@
       </template>
       <template #content>
         <h2>TODO</h2>
+        <img
+          src="../../assets/images/space-page-under-construction.png"
+          class="md:col-4 md:col-offset-4 no-pad"
+        />
       </template>
     </Card>
     <Footer></Footer>

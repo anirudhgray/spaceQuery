@@ -87,7 +87,7 @@
               <p v-for="error in errors" :key="error">{{ error }}</p>
             </Message>
             <Message
-              class="absolute bottom-0 right-0 left-0"
+              class="absolute bottom-0 right-0"
               :closable="false"
               severity="success"
               v-if="success"

@@ -52,12 +52,20 @@
             </form>
 
             <Message
-              class="absolute bottom-0 right-0 left-0"
+              class="absolute bottom-0 right-0"
               :closable="false"
               severity="error"
               v-if="errors.length"
             >
               <p v-for="error in errors" :key="error">{{ error }}</p>
+            </Message>
+            <Message
+              class="absolute bottom-0 right-0"
+              :closable="false"
+              severity="success"
+              v-if="success"
+            >
+              Please check your inbox for the reset link.
             </Message>
           </div>
         </div>
@@ -104,12 +112,10 @@ export default {
     },
     async forgot () {
       const forgotData = { email: this.email }
+      this.success = true
+      this.email = ''
       await axios
         .post('/api/v1/users/actions/forgot/', forgotData)
-        .then(response => {
-          this.success = true
-          this.email = ''
-        })
         .catch(error => {
           if (error.response) {
             this.errors.push(error.response.data)
