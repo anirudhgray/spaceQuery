@@ -2,7 +2,7 @@
   <div class="grey flex flex-column">
     <Navbar></Navbar>
     <Skeleload v-if="pageLoad"></Skeleload>
-    <Card class="col-8 col-offset-2 my-4 px-2">
+    <Card class="md:col-8 md:col-offset-2 my-4 px-2">
       <template #header>
         <router-link class="link" to="/explore/external/"
           ><i class="pi pi-undo"></i> Back to all APIs</router-link
@@ -35,8 +35,8 @@
           </div>
 
           <p>Date Filter</p>
-          <div class="field grid align-items-center">
-            <div class="p-inputgroup col-5">
+          <div class="field grid mobcol align-items-center">
+            <div class="p-inputgroup md:col-5">
               <span class="p-inputgroup-addon">
                 <RadioButton
                   name="dayFilterChoice"
@@ -47,7 +47,7 @@
               </span>
               <InputText placeholder="Mars Sol" v-model="dayMars" />
             </div>
-            <div class="p-inputgroup col-5">
+            <div class="p-inputgroup md:col-5">
               <span class="p-inputgroup-addon">
                 <RadioButton
                   name="dayFilterChoice"
@@ -62,7 +62,7 @@
                 dateFormat="yy-mm-dd"
               />
             </div>
-            <div class="col-2">
+            <div class="md:col-2">
               <RadioButton
                 name="dayFilterChoice"
                 id="day-latest"

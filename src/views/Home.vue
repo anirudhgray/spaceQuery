@@ -10,13 +10,13 @@
     >
       <h1 class="md:text-8xl text-5xl text-center">spaceQuery</h1>
       <div class="flex flex-column align-items-center">
-        <div class="grid">
-          <router-link to="/login"
-            ><Button class="mx-2" label="Log in"
+        <div class="grid mobcol">
+          <router-link class="mx-2 flex" to="/login"
+            ><Button class="mx-auto" label="Log in"
           /></router-link>
           <Button class="mx-2" label="Learn more" @click="scrollAbout" />
-          <a href="https://github.com/anirudhgray/space-front"
-            ><Button class="mx-2" label="Github"
+          <a class="mx-2 flex" href="https://github.com/anirudhgray/space-front"
+            ><Button class="mx-auto" label="Github"
           /></a>
         </div>
         <p class="mt-8">Powered by the NASA open APIs.</p>
@@ -83,6 +83,12 @@
             <p class="col-8 m-auto text-right">Await great knowledge.</p>
             <p class="col-4 text-6xl text-left">6</p>
           </div>
+          <div class="grid">
+            <p class="col-4 text-6xl text-right">7</p>
+            <p class="col-8 m-auto text-left">
+              Save cool results to your profile.
+            </p>
+          </div>
         </template>
         <template #footer>
           <p>
@@ -109,7 +115,7 @@
                 @mouseleave="toggleAPI(index)"
                 v-show="api.visible"
               >
-                <p class="text-6xl" :style="color">{{ api.letter }}</p>
+                <p class="text-6xl">{{ api.letter }}</p>
                 <p class="md:text-2xl text-xl">{{ api.name }}</p>
                 <img :src="api.imgsrc" class="w-min m-auto mt-5" />
               </div>

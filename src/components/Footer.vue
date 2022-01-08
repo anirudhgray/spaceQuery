@@ -5,11 +5,11 @@
         <h3 class="text-center">spaceQuery</h3>
       </template>
       <template #content>
-        <div class="grid grid-no-gutter">
+        <div class="grid tabcol grid-no-gutter">
           <div class="col">
             <ul>
-              <li class="w-max mr-auto">Illustrations by/from:</li>
-              <li class="w-max mr-auto">
+              <li class="w-max mr-auto tabcenter">Illustrations by/from:</li>
+              <li class="w-max lg:mt-0 mt-2 mr-auto tabcenter">
                 <a
                   class="link"
                   href="https://icons8.com/illustrations/author/6103782c1781404355b65f35"
@@ -20,16 +20,16 @@
                   >Ouch!</a
                 >
               </li>
-              <li class="w-max mr-auto">
+              <li class="w-max mr-auto tabcenter">
                 <a href="https://icons8.com">Icons8</a>
               </li>
-              <li class="w-max mr-auto">
+              <li class="w-max mr-auto tabcenter">
                 <a class="link" href="https://drawkit.com/">Drawkit</a>
               </li>
-              <li class="w-max mr-auto">
+              <li class="w-max mr-auto tabcenter">
                 <a class="link" href="https://exoplanets.nasa.gov/">NASA</a>
               </li>
-              <li class="w-max mr-auto">
+              <li class="w-max mr-auto tabcenter">
                 <a class="link" href="https://www.humaaans.com/">Humaaans</a>
               </li>
             </ul>
@@ -73,26 +73,28 @@
             </ul>
           </div>
           <div class="col">
-            <p class="text-right">
-              A webapp to easily query NASA and other space APIs, and save the
-              results.
-            </p>
-            <router-link
-              v-if="$store.state.isAuthenticated"
-              to="/feedback"
-              class="w-max ml-auto block link"
-            >
-              Feedback <i class="text-3xl pi pi-info-circle"></i>
-            </router-link>
-            <a
-              class="w-max ml-auto block link"
-              href="https://github.com/anirudhgray/space-front"
-            >
-              View on GitHub <i class="text-3xl pi pi-github"></i>
-            </a>
-            <a class="w-max ml-auto block link">
-              Watch demo on YouTube <i class="text-3xl pi pi-youtube"></i>
-            </a>
+            <ul>
+              <p class="md:text-right text-center">
+                A webapp to easily query NASA and other space APIs, and save the
+                results.
+              </p>
+              <router-link
+                v-if="$store.state.isAuthenticated"
+                to="/feedback"
+                class="w-max ml-auto tabcenter block link"
+              >
+                Feedback <i class="text-3xl pi pi-info-circle"></i>
+              </router-link>
+              <a
+                class="w-max ml-auto tabcenter block link"
+                href="https://github.com/anirudhgray/space-front"
+              >
+                View on GitHub <i class="text-3xl pi pi-github"></i>
+              </a>
+              <a class="w-max ml-auto tabcenter block link">
+                Watch demo on YouTube <i class="text-3xl pi pi-youtube"></i>
+              </a>
+            </ul>
           </div>
         </div>
       </template>
@@ -115,3 +117,12 @@ export default {
   }
 }
 </script>
+
+<style>
+@media (max-width: 700px) {
+  .tabcenter {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+</style>

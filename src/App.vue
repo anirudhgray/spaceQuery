@@ -165,5 +165,16 @@ a {
   .r-700-invis {
     display: none;
   }
+  .tabcol {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+@media (max-width: 425px) {
+  .mobcol {
+    flex-direction: column;
+    align-content: center;
+    gap: 2rem;
+  }
 }
 </style>

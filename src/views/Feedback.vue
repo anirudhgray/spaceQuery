@@ -3,8 +3,8 @@
     <Navbar></Navbar>
     <Card class="m-4 px-2">
       <template #content>
-        <div class="grid">
-          <div class="col-7">
+        <div class="grid tabcol">
+          <div class="lg:col-7 col">
             <form @submit.prevent="submit" class="h-full flex flex-column">
               <div class="field">
                 <h1>Feedback Toime</h1>
@@ -53,7 +53,7 @@
               </div>
             </form>
           </div>
-          <div class="col-5">
+          <div class="lg:col-5 col">
             <img src="../assets/images/feedback-humaaans.svg" />
           </div>
         </div>

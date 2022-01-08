@@ -6,8 +6,8 @@
       <form @submit.prevent="confirmEdit($store.state.user.id)">
         <Card class="m-4">
           <template #content>
-            <div class="grid">
-              <div class="col-3 relative">
+            <div class="grid tabcol">
+              <div class="lg:col-3 col relative">
                 <Button
                   class="absolute bottom-0 left-50"
                   icon="pi pi-refresh"
@@ -15,11 +15,11 @@
                   @click="changeAvatar"
                 >
                 </Button>
-                <Avatar class="w-14rem h-14rem" size="xlarge" :image="pfp">
+                <Avatar class="w-full h-auto" size="xlarge" :image="pfp">
                 </Avatar>
               </div>
-              <div class="col-5">
-                <h1>{{ email }}</h1>
+              <div class="lg:col-5 col text-center lg:text-left">
+                <h1 class="text-2xl md:text-5xl">{{ email }}</h1>
                 <div v-if="!edit">
                   <p><b>First name:</b> {{ firstname }}</p>
                   <p><b>Last name:</b> {{ lastname }}</p>
@@ -37,19 +37,19 @@
                   </div>
                 </div>
               </div>
-              <div class="col text-right">
+              <div class="lg:col-2 col lg:text-right text-center">
                 <p>Saved results</p>
                 <p class="text-8xl">{{ saved }}</p>
               </div>
-              <div class="col text-right">
+              <div class="lg:col-2 col lg:text-right text-center">
                 <p>Queries made</p>
                 <p class="text-8xl">{{ queries }}</p>
               </div>
             </div>
           </template>
           <template #footer>
-            <div class="grid justify-content-between">
-              <div class="grid" v-if="this.$route.params.id === 'you'">
+            <div class="grid mobcol justify-content-between">
+              <div class="grid mobcol" v-if="this.$route.params.id === 'you'">
                 <Button
                   v-if="!edit"
                   class="p-button-text"

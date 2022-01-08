@@ -2,7 +2,7 @@
   <div class="grey flex flex-column">
     <Navbar></Navbar>
     <Skeleload v-if="pageLoad"></Skeleload>
-    <Card class="col-8 col-offset-2 my-4 px-2">
+    <Card class="md:col-8 md:col-offset-2 my-4 px-2">
       <template #header>
         <router-link class="link" to="/explore/external/"
           ><i class="pi pi-undo"></i> Back to all APIs</router-link

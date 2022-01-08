@@ -2,7 +2,46 @@
   <router-link class="r-900-vis landing-link mx-auto" to="/"
     >spaceQuery</router-link
   >
-  <Button icon="pi pi-bars" class="r-700-vis mx-auto mt-4"></Button>
+  <Button
+    icon="pi pi-bars"
+    @click="togglenav"
+    class="r-700-vis mx-auto mt-4"
+  ></Button>
+  <Card class="r-700-vis col-8 mt-3 col-offset-2" v-if="mobnav">
+    <template #content>
+      <div class="flex flex-column text-center">
+        <p
+          class="paralink navlink mx-2 my-2 p-2"
+          to="/explore/external"
+          @click="toggleExternal"
+        >
+          Explore APIs
+        </p>
+        <Menu ref="menu" :model="items" :popup="true">
+          <template #item="{ item }">
+            <div @click="externalMenuPush(item.to)" class="px-3 py-2 linkhover">
+              <router-link :to="item.to">{{ item.label }}</router-link>
+            </div>
+          </template>
+        </Menu>
+        <router-link class="navlink mx-2 my-2 p-2" to="/user/search"
+          >Search Users</router-link
+        >
+        <Button
+          icon="pi pi-moon"
+          class="px-auto mx-auto p-button-rounded p-button-text my-2 text-2xl"
+        />
+        <router-link to="/user/you" class="navlink my-2 p-2">{{
+          $store.state.user.email
+        }}</router-link>
+        <Button
+          @click="logout"
+          class="p-button-danger my-2 p-2"
+          label="Log Out"
+        ></Button>
+      </div>
+    </template>
+  </Card>
   <div class="r-700-invis grid justify-content-between mt-4 mx-4">
     <nav class="grid align-items-center">
       <router-link class="r-900-invis landing-link mx-2" to="/"
@@ -82,25 +121,31 @@ li {
 <script>
 import Button from 'primevue/button'
 import Menu from 'primevue/menu'
+import Card from 'primevue/card'
 import axios from 'axios'
 
 export default {
   name: 'Navbar',
   components: {
     Button,
-    Menu
+    Menu,
+    Card
   },
   data () {
     return {
       items: [
         { label: 'See all', to: '/explore/external/' }
-      ]
+      ],
+      mobnav: false
     }
   },
   mounted () {
     this.fetchAPIS()
   },
   methods: {
+    togglenav () {
+      this.mobnav = !this.mobnav
+    },
     externalMenuPush (to) {
       this.$router.push(to)
     },
