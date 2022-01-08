@@ -1,24 +1,2 @@
-# space-front
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# spaceQuery Frontend
+This is the repo containing the clinet-side code (Vue) for the spaceQuery webapp. The server-side (Django) code is at [this repository](https://github.com/anirudhgray/space-api).

@@ -13,10 +13,9 @@
       </template>
       <template #subtitle>
         <p>
-          NOTE: SECURE THE API KEY FOR THIS
-          https://www.freecodecamp.org/news/private-api-keys/ Where is the ISS
-          right now? Get coordinates and satellite imagery. Credit:
-          <a href="https://github.com/open-notify">Open Notify</a>
+          Where is the ISS right now? Get coordinates and satellite imagery.
+          Credit:
+          <a href="https://wheretheiss.at/">Where the ISS at?</a>
         </p>
       </template>
       <template #content>
@@ -81,7 +80,7 @@ export default {
     async getISS () {
       this.pageLoad = true
       await axios
-        .get('https://cors-anywhere.herokuapp.com/https://api.wheretheiss.at/v1/satellites/25544')
+        .get('/api/v1/externals/actions/iss/data')
         .then(response => {
           this.longitude = response.data.longitude
           this.latitude = response.data.latitude
@@ -91,12 +90,12 @@ export default {
           console.log(error)
         })
       await axios
-        .get(`https://cors-anywhere.herokuapp.com/https://api.wheretheiss.at/v1/coordinates/${this.latitude},${this.longitude}`)
+        .post('/api/v1/externals/actions/iss/loc', { lat: this.latitude, long: this.longitude })
         .then(response => {
           this.timezone = response.data.timezone_id
           this.time_offset = response.data.offset
           this.country_code = response.data.country_code
-          this.map_url = `https://www.google.com/maps/embed/v1/search?q=${this.latitude},${this.longitude}&key=AIzaSyCeK3RSCp2QXCWOLzTYrUuG8sncd0dheME`
+          this.map_url = response.data.map_url
         })
         .catch(error => {
           console.log(error)

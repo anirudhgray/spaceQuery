@@ -47,7 +47,7 @@
                 >
               </li>
               <li class="w-max mx-auto">
-                <a class="link" href="https://github.com/open-notify"
+                <a class="link" href="https://wheretheiss.at/"
                   >Where is the ISS?</a
                 >
               </li>
