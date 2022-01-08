@@ -13,6 +13,7 @@ from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
 from django.utils.crypto import get_random_string
 from django.contrib.auth.hashers import make_password, check_password
+from config.settings import EMAIL_HOST_USER
 import datetime
 import pytz
 
@@ -67,7 +68,7 @@ def feedback(request):
         Category: {request.data.get("category")},
         Description: {request.data.get("desc")}''',
         from_email='mail@gmail.com',
-        recipient_list=['spacequerywebapp@gmail.com'],
+        recipient_list=[EMAIL_HOST_USER],
         fail_silently=False,
     )
 

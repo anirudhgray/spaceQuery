@@ -1,15 +1,6 @@
-After login, send a get request to the profiles endpoint. Filter for the logged in user.
-Return user id and "new" field value. If "new" is True, ask for Profile information. Otherwise continue directly to the profile.
-
-NOTES: Should have just used djoser...
-Had some issues with token in browser cache.
-Add docstrings
-Make it possible to handle large number of results in the user query.
-
+# spaceQuery API
+This is the repo containing the server-side code (Django) for the spaceQuery webapp. The client-side (Vue) code is at [this repository](https://github.com/anirudhgray/space-front).
 # API
-
-**/api/v1/users/auths**
-- POST (account creation)
 
 **/api-token-auth**
 - POST (will return token for storage)
@@ -20,22 +11,62 @@ Make it possible to handle large number of results in the user query.
 ### Prefix:
 /api/v1
 
-**/users**
-Root API for the users app.
-
 **NOTE: You must be logged in.**
+
+### Users
 
 **/users/auths**
 - GET
+- POST (account creation)
   
 **/users/auths/:id**
 - GET
 - PATCH (only for that user and admins)
 - DELETE (only for admins)
 
-**/users/profiles**
+**/users/profiles** - User Profile
 - GET
 
 **/users/profiles/:id**
 - GET
 - PATCH (only for that user and admins)
+
+**/users/me** - Current logged in User
+- GET
+
+**/users/actions/logout**
+
+**/users/actions/reset** - Password Reset
+
+**/users/actions/forgot** - Forgot Password
+
+**/users/actions/token-check** - Post-Forgot Password Reset
+
+**/users/actions/feedback**
+
+### Saves
+
+**/saves** - Saved Posts
+- GET
+- POST
+- DELETE (that user and admins)
+
+**/history** - User history
+- GET (that user and admins)
+- POST
+  
+### Externals
+
+**/externals** - External APIs available.
+- GET (everyone, rest for admins only)
+- POST
+- DELETE
+- PATCH
+- PUT
+
+**/externals/actions/iss/data**
+- GET
+
+**/externals/actions/iss/loc**
+- POST
+  

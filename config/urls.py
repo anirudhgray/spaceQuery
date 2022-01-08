@@ -6,7 +6,7 @@ from rest_framework import routers
 from apps.users.urls import router as user_router
 from apps.saves.urls import router as save_router
 from apps.externals.urls import router as external_router
-from apps import users
+from apps import users, externals
 
 router = routers.DefaultRouter()
 router.registry.extend(user_router.registry)
@@ -22,5 +22,6 @@ urlpatterns = [
         title="School Service",
         description="API developers hoping to use our service"
     ), name='openapi-schema'),
-    path('api/v1/users/actions/', include(users.urls))
+    path('api/v1/users/actions/', include(users.urls)),
+    path('api/v1/externals/actions/', include(externals.urls))
 ]
