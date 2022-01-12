@@ -91,7 +91,10 @@
               >
                 View on GitHub <i class="text-3xl pi pi-github"></i>
               </a>
-              <a class="w-max ml-auto tabcenter block link">
+              <a
+                @click="notImplemented"
+                class="w-max ml-auto tabcenter block link"
+              >
                 Watch demo on YouTube <i class="text-3xl pi pi-youtube"></i>
               </a>
             </ul>
@@ -114,6 +117,11 @@ export default {
   name: 'Footer',
   components: {
     Card
+  },
+  methods: {
+    notImplemented () {
+      this.$toast.add({ severity: 'error', summary: 'Not implemented yet.', detail: 'What a lazy dev...', life: 3000 })
+    }
   }
 }
 </script>

@@ -29,6 +29,7 @@
         >
         <Button
           icon="pi pi-moon"
+          @click="this.$store.dispatch('notImplemented')"
           class="px-auto mx-auto p-button-rounded p-button-text my-2 text-2xl"
         />
         <router-link to="/user/you" class="navlink my-2 p-2">{{
@@ -66,7 +67,11 @@
       >
     </nav>
     <nav class="grid align-items-center">
-      <Button icon="pi pi-moon" class="p-button-rounded p-button-text" />
+      <Button
+        icon="pi pi-moon"
+        @click="notImplemented"
+        class="p-button-rounded p-button-text"
+      />
       <router-link to="/user/you" class="navlink mx-4">{{
         $store.state.user.email
       }}</router-link>
@@ -143,6 +148,9 @@ export default {
     this.fetchAPIS()
   },
   methods: {
+    notImplemented () {
+      this.$toast.add({ severity: 'error', summary: 'Not implemented yet.', detail: 'What a lazy dev...', life: 3000 })
+    },
     togglenav () {
       this.mobnav = !this.mobnav
     },

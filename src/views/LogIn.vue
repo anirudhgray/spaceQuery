@@ -64,7 +64,7 @@
               <p class="my-2 mx-auto">or</p>
 
               <div class="field">
-                <Button class="w-full github-button"
+                <Button @click="notImplemented" class="w-full github-button"
                   ><p class="mx-auto">
                     <i class="pi pi-github mr-2"></i> Log in with GitHub
                   </p></Button
@@ -133,6 +133,9 @@ export default {
     this.checkUser()
   },
   methods: {
+    notImplemented () {
+      this.$toast.add({ severity: 'error', summary: 'Not implemented yet.', detail: 'What a lazy dev...', life: 3000 })
+    },
     checkUser () {
       if (this.$store.state.isAuthenticated) {
         console.log('ok')

@@ -14,6 +14,7 @@
       </form>
       <div class="grid grid-nogutter justify-content-evenly mb-2">
         <Card
+          data-aos="fade-up"
           v-for="user in results"
           :key="user.user"
           class="m-2 px-2 -pb-1 result-card"

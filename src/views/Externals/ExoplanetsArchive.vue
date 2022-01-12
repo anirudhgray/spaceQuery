@@ -42,6 +42,14 @@ export default {
     Footer,
     Navbar,
     Card
+  },
+  mounted () {
+    this.notImplemented()
+  },
+  methods: {
+    notImplemented () {
+      this.$toast.add({ severity: 'error', summary: 'Not implemented yet.', detail: 'What a lazy dev...', life: 3000 })
+    }
   }
 }
 </script>

@@ -23,8 +23,13 @@
       </div>
     </div>
 
-    <div class="h-auto overflow-auto" ref="about">
-      <Card class="md:col-8 md:col-offset-2 mb-4 h-auto text-center md:p-5 p-1">
+    <div class="h-auto overflow-hidden" ref="about">
+      <Card
+        data-aos="fade-up"
+        data-aos-duration="1500"
+        data-aos-offset="250"
+        class="md:col-8 md:col-offset-2 mb-4 h-auto text-center md:p-5 p-1"
+      >
         <template #title>
           <h2>So, how does this work?</h2>
         </template>
@@ -96,7 +101,12 @@
           </p>
         </template>
       </Card>
-      <Card class="md:col-8 md:col-offset-2 mb-4 h-auto text-center -p-3 pt-5">
+      <Card
+        data-aos="fade-up"
+        data-aos-duration="1500"
+        data-aos-offset="250"
+        class="md:col-8 md:col-offset-2 mb-4 h-auto text-center -p-3 pt-5"
+      >
         <template #title> APIs available </template>
         <template #footer>
           <div class="grid">
@@ -111,7 +121,7 @@
                 </p>
               </div>
               <div
-                class="h-full"
+                class="h-full api-icon"
                 @mouseleave="toggleAPI(index)"
                 v-show="api.visible"
               >
@@ -125,7 +135,12 @@
       </Card>
     </div>
 
-    <div class="h-auto mb-4 overflow-auto flex flex-column">
+    <div
+      data-aos="fade-up"
+      data-aos-duration="1500"
+      data-aos-offset="250"
+      class="h-auto mb-4 overflow-auto flex flex-column"
+    >
       <img
         src="../assets/images/space-coming-soon.png"
         class="md:col-4 md:col-offset-4 no-pad"
@@ -198,3 +213,17 @@ export default {
   }
 }
 </script>
+
+<style>
+.api-icon {
+  animation: fadeIn 1s;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+</style>

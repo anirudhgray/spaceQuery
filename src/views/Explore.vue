@@ -4,6 +4,8 @@
     <Skeleload v-if="pageLoad"></Skeleload>
     <div class="grid grid-nogutter justify-content-evenly m-4">
       <Card
+        data-aos="fade-up"
+        data-aos-offset="-900"
         v-for="(api, i) in apiDetails"
         :key="i"
         class="m-2 px-2 -pb-1 result-card"

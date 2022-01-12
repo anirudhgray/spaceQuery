@@ -1,12 +1,20 @@
 <template>
   <router-view :key="$route.fullPath" />
+  <Toast
+    position="bottom-right"
+    :breakpoints="{ '920px': { width: '100%', right: '0', left: '0' } }"
+  ></Toast>
 </template>
 
 <script>
+import Toast from 'primevue/toast'
 import axios from 'axios'
 
 export default {
   name: 'App',
+  components: {
+    Toast
+  },
   beforeCreate () {
     this.$store.commit('initializeStore')
 

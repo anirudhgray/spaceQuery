@@ -118,7 +118,7 @@
     ></i>
 
     <div v-if="results.length" class="flex flex-column">
-      <Card class="col-8 col-offset-2 px-2 mb-4">
+      <Card class="md:col-8 md:col-offset-2 px-2 mb-4">
         <template #header>
           <img :src="results[index].img_src" />
         </template>
@@ -169,7 +169,7 @@
       <Card
         v-for="(rover, i) in roverInfoDisplay"
         :key="i"
-        class="col-8 col-offset-2 px-2 mb-4"
+        class="md:col-8 md:col-offset-2 my-4 px-2"
       >
         <template #title>
           <p>{{ rover.name }}</p></template
@@ -346,11 +346,9 @@ export default {
         queryURL = baseURL + `?${paramString.toString()}`
       }
       this.roverInfo(0, queryRover)
-      console.log(queryURL)
       await axios
         .get(queryURL)
         .then(response => {
-          console.log(response.data.photos)
           this.loading = false
           if (this.dayFilterChoice === 'Latest') {
             this.results = response.data.latest_photos

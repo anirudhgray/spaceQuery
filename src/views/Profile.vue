@@ -125,6 +125,8 @@
         <h2 class="text-center">Saved Results</h2>
         <div class="grid justify-content-evenly mx-4 my-4">
           <Card
+            data-aos="fade-up"
+            data-aos-offset="-900"
             v-for="(save, i) in saveDisplays"
             class="relative col-12 md:col-5 lg:col-3 m-3"
             :key="save.id"
