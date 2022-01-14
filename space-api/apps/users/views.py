@@ -21,6 +21,7 @@ import pytz
 @api_view(('POST',))
 @renderer_classes((TemplateHTMLRenderer, JSONRenderer))
 def check_reset_token(request):
+    """Handle password reset requests initiated via a valid forgot password link."""
     curr_time = datetime.datetime.now().replace(tzinfo=pytz.UTC)
     id = request.data.get('id')
     token = request.data.get('token')
@@ -41,6 +42,7 @@ def check_reset_token(request):
 @api_view(('POST',))
 @renderer_classes((TemplateHTMLRenderer, JSONRenderer))
 def forgot_pwd(request):
+    """Handle forgot password requests. Generate hashed tokens for the same, and email the user with a reset link."""
     token = get_random_string(length=16)
     token_hash = make_password(token)
     id = get_random_string(length=16)
@@ -62,6 +64,7 @@ def forgot_pwd(request):
 @api_view(('POST',))
 @renderer_classes((TemplateHTMLRenderer, JSONRenderer))
 def feedback(request):
+    """Send an email with the feedback content as submitted by the user."""
     res = sm(
         subject=request.data.get("email"),
         message=f'''Rating: {request.data.get("rate")},
@@ -104,6 +107,7 @@ class User_logout(GenericAPIView):
 
 
 class Reset_password(GenericAPIView):
+    """Handle password reset requests initiated by a logged in user."""
     permission_classes = [(IsAuthenticated)]
 
     def post(self, request, format=None):
@@ -118,6 +122,7 @@ class Reset_password(GenericAPIView):
 
 
 class MeViewSet(viewsets.ModelViewSet):
+    """Return profile information about the current logged in user."""
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
     permission_classes = (IsAuthenticated,)

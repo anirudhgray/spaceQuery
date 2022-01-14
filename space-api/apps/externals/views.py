@@ -20,6 +20,8 @@ class ExternalViewSet(viewsets.ModelViewSet):
 @api_view(('GET',))
 @renderer_classes((TemplateHTMLRenderer, JSONRenderer))
 def ISSData(request):
+    """Return the current position (lat, long, and other data) of the ISS as JSON."""
+
     URL = 'https://api.wheretheiss.at/v1/satellites/25544'
     r = requests.get(url=URL)
     data = r.json()
@@ -30,6 +32,8 @@ def ISSData(request):
 @api_view(('POST',))
 @renderer_classes((TemplateHTMLRenderer, JSONRenderer))
 def ISSLoc(request):
+    """Return the country code (if applicable), timezone and map url of specified coordinates as JSON."""
+
     URL = 'https://api.wheretheiss.at/v1/coordinates/'
     lat = request.data.get('lat')
     long = request.data.get('long')

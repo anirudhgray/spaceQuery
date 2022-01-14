@@ -97,8 +97,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'space_db',
-        'USER': 'space_admin',
-        'PASSWORD': 'password',
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PWD'),
         'HOST': 'localhost',
         'PORT': '',
     }
