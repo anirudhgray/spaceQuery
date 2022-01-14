@@ -8,7 +8,7 @@
         data-aos-offset="-900"
         v-for="(api, i) in apiDetails"
         :key="i"
-        class="m-2 px-2 -pb-1 result-card"
+        class="card m-2 px-2 -pb-1 result-card"
       >
         <template #header>
           <Image

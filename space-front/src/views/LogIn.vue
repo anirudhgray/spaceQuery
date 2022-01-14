@@ -3,7 +3,7 @@
     <router-link class="landing-link w-min ml-4 mt-3" to="/"
       >spaceQuery</router-link
     >
-    <Card class="m-4 px-2">
+    <Card class="card m-4 px-2">
       <template #content>
         <div class="grid">
           <div class="r-700-invis lg:col-4 md:col-6">

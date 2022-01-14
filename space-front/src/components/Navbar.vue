@@ -7,7 +7,7 @@
     @click="togglenav"
     class="r-700-vis mx-auto mt-4"
   ></Button>
-  <Card class="r-700-vis col-8 mt-3 col-offset-2" v-if="mobnav">
+  <Card class="card r-700-vis col-8 mt-3 col-offset-2" v-if="mobnav">
     <template #content>
       <div class="flex flex-column text-center">
         <p
@@ -28,8 +28,11 @@
           >Search Users</router-link
         >
         <Button
-          icon="pi pi-moon"
-          @click="this.$store.dispatch('notImplemented')"
+          :icon="{
+            'pi pi-moon': this.$store.state.light,
+            'pi pi-sun': !this.$store.state.light,
+          }"
+          @click="changeTheme"
           class="px-auto mx-auto p-button-rounded p-button-text my-2 text-2xl"
         />
         <router-link to="/user/you" class="navlink my-2 p-2">{{
@@ -68,8 +71,11 @@
     </nav>
     <nav class="grid align-items-center">
       <Button
-        icon="pi pi-moon"
-        @click="notImplemented"
+        :icon="{
+          'pi pi-moon': this.$store.state.light,
+          'pi pi-sun': !this.$store.state.light,
+        }"
+        @click="changeTheme"
         class="p-button-rounded p-button-text"
       />
       <router-link to="/user/you" class="navlink mx-4">{{
@@ -89,11 +95,11 @@
   display: block;
   width: 100%;
   height: 2px;
-  background-color: purple;
+  background-color: var(--purple);
   transition: width 300ms;
 }
 .navlink {
-  color: purple;
+  color: var(--purple);
   text-decoration: none;
   font-family: sans-serif;
 }
@@ -102,7 +108,7 @@
   display: block;
   width: 0;
   height: 2px;
-  background-color: purple;
+  background-color: var(--purple);
   transition: width 300ms;
 }
 .navlink:hover::after {
@@ -150,6 +156,9 @@ export default {
   methods: {
     notImplemented () {
       this.$toast.add({ severity: 'error', summary: 'Not implemented yet.', detail: 'What a lazy dev...', life: 3000 })
+    },
+    changeTheme () {
+      this.$store.commit('changeTheme')
     },
     togglenav () {
       this.mobnav = !this.mobnav

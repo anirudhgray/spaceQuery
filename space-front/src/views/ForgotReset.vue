@@ -4,7 +4,7 @@
       >spaceQuery</router-link
     >
     <Skeleload v-if="loading"></Skeleload>
-    <Card class="m-4 px-2">
+    <Card class="card m-4 px-2">
       <template #content>
         <div class="grid">
           <div class="r-700-invis lg:col-4 md:col-6">

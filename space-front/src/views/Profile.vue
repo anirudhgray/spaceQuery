@@ -4,7 +4,7 @@
     <Skeleload v-if="pageLoad"></Skeleload>
     <div class="h-auto overflow-auto">
       <form @submit.prevent="confirmEdit($store.state.user.id)">
-        <Card class="m-4">
+        <Card class="card m-4">
           <template #content>
             <div class="grid tabcol">
               <div class="lg:col-3 col relative">
@@ -101,7 +101,7 @@
           <Card
             v-for="historyItem in historyDisplays"
             :key="historyItem.id"
-            class="relative col-12 md:col-5 lg:col-3 m-3 darker-card"
+            class="card relative col-12 md:col-5 lg:col-3 m-3 darker-card"
           >
             <template #title>
               <h2>{{ historyItem.title }}</h2>
@@ -128,7 +128,7 @@
             data-aos="fade-up"
             data-aos-offset="-900"
             v-for="(save, i) in saveDisplays"
-            class="relative col-12 md:col-5 lg:col-3 m-3"
+            class="card relative col-12 md:col-5 lg:col-3 m-3"
             :key="save.id"
           >
             <template #title>

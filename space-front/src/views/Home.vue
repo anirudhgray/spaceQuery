@@ -28,7 +28,7 @@
         data-aos="fade-up"
         data-aos-duration="1500"
         data-aos-offset="250"
-        class="md:col-8 md:col-offset-2 mb-4 h-auto text-center md:p-5 p-1"
+        class="md:col-8 card md:col-offset-2 mb-4 h-auto text-center md:p-5 p-1"
       >
         <template #title>
           <h2>So, how does this work?</h2>
@@ -105,7 +105,7 @@
         data-aos="fade-up"
         data-aos-duration="1500"
         data-aos-offset="250"
-        class="md:col-8 md:col-offset-2 mb-4 h-auto text-center -p-3 pt-5"
+        class="md:col-8 card md:col-offset-2 mb-4 h-auto text-center -p-3 pt-5"
       >
         <template #title> APIs available </template>
         <template #footer>

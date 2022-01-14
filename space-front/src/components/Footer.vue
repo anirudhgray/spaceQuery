@@ -1,6 +1,6 @@
 <template>
   <div class="h-auto overflow-auto">
-    <Card>
+    <Card class="card">
       <template #title>
         <h3 class="text-center">spaceQuery</h3>
       </template>

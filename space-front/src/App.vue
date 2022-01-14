@@ -35,6 +35,38 @@ export default {
   box-sizing: border-box;
 }
 
+:root {
+  --bg-colour: rgb(247, 247, 247);
+  --card-color: white;
+  --card-color-darker: grey;
+  --primary-text-colour: black;
+  --secondary-text-colour: rgb(82, 82, 82);
+  --purple: purple;
+  --skele-bg: white;
+}
+.darkmode {
+  --bg-colour: rgb(46, 46, 46);
+  --card-color: rgb(100, 100, 100);
+  --card-color-darker: rgb(68, 68, 68);
+  --primary-text-colour: white;
+  --secondary-text-colour: rgb(175, 174, 174);
+  --purple: rgb(214, 50, 214);
+  --skele-bg: rgb(68, 68, 68);
+}
+.grey {
+  background: var(--bg-colour);
+}
+.card {
+  background: var(--card-color);
+  color: var(--primary-text-colour);
+}
+.skele {
+  background: var(--skele-bg);
+}
+html {
+  background: var(--bg-colour);
+}
+
 /* reset margin */
 body,
 h1,
@@ -64,7 +96,7 @@ p {
 body {
   font-family: var(--ff-sans-normal);
   font-size: var(--fs-400);
-  color: hsl(var(--clr-white));
+  color: var(--primary-text-colour);
   background-color: hsl(var(--clr-dark));
   line-height: 1.5;
   min-height: 100vh;
@@ -84,16 +116,6 @@ textarea,
 select {
   font: inherit;
 }
-
-.light-theme {
-  ---background: rgb(247, 247, 247);
-  ---card-color: white;
-  ---text: black;
-}
-
-.grey {
-  background: rgb(247, 247, 247);
-}
 .no-pad {
   padding: 0;
 }
@@ -106,7 +128,7 @@ select {
   content: " ";
   z-index: -1;
   background-color: transparent;
-  border: 3px solid purple;
+  border: 3px solid var(--purple);
   opacity: 0;
   transition: opacity ease-in-out 250ms;
 }
@@ -120,14 +142,14 @@ select {
 }
 a {
   text-decoration: none;
-  color: grey;
+  color: var(--secondary-text-colour);
 }
 .darker-card {
-  background: rgb(218, 218, 218);
+  background: var(--card-color-darker);
 }
 .link {
   text-decoration: none;
-  color: grey;
+  color: var(--secondary-text-colour);
 }
 .link:hover {
   color: black;

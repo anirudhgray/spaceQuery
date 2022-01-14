@@ -4,6 +4,7 @@ import router from '../router'
 
 export default createStore({
   state: {
+    light: true,
     isAuthenticated: false,
     token: '',
     user: {
@@ -35,6 +36,19 @@ export default createStore({
     },
     setUser (state, user) {
       state.user = user
+    },
+    setTheme (state) {
+      const ht = document.querySelector('html')
+      if (localStorage.getItem('theme') === 'false' & !ht.classList.contains('darkmode')) {
+        ht.classList.toggle('darkmode')
+        state.light = false
+      }
+    },
+    changeTheme (state) {
+      const ht = document.querySelector('html')
+      ht.classList.toggle('darkmode')
+      state.light = !state.light
+      localStorage.setItem('theme', state.light)
     }
   },
   actions: {

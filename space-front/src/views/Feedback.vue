@@ -1,7 +1,7 @@
 <template>
   <div class="grey flex flex-column">
     <Navbar></Navbar>
-    <Card class="m-4 px-2">
+    <Card class="card m-4 px-2">
       <template #content>
         <div class="grid tabcol">
           <div class="lg:col-7 col">

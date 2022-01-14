@@ -17,7 +17,7 @@
           data-aos="fade-up"
           v-for="user in results"
           :key="user.user"
-          class="m-2 px-2 -pb-1 result-card"
+          class="card m-2 px-2 -pb-1 result-card"
           @click="routerUserPage(user.user)"
         >
           <template #content>

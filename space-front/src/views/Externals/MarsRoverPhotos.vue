@@ -2,7 +2,7 @@
   <div class="grey flex flex-column">
     <Navbar></Navbar>
     <Skeleload v-if="pageLoad"></Skeleload>
-    <Card class="md:col-8 md:col-offset-2 my-4 px-2">
+    <Card class="card md:col-8 md:col-offset-2 my-4 px-2">
       <template #header>
         <router-link class="link" to="/explore/external/"
           ><i class="pi pi-undo"></i> Back to all APIs</router-link
@@ -118,7 +118,7 @@
     ></i>
 
     <div v-if="results.length" class="flex flex-column">
-      <Card class="md:col-8 md:col-offset-2 px-2 mb-4">
+      <Card class="card md:col-8 md:col-offset-2 px-2 mb-4">
         <template #header>
           <img :src="results[index].img_src" />
         </template>
@@ -169,7 +169,7 @@
       <Card
         v-for="(rover, i) in roverInfoDisplay"
         :key="i"
-        class="md:col-8 md:col-offset-2 my-4 px-2"
+        class="card md:col-8 md:col-offset-2 my-4 px-2"
       >
         <template #title>
           <p>{{ rover.name }}</p></template
