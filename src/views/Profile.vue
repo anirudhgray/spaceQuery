@@ -279,7 +279,7 @@ export default {
     },
     async confirmEdit (userid) {
       await axios
-        .patch(`/api/v1/users/profiles/${userid}/`, { avatar: this.selectedAvatar, first_name: this.firstname, last_name: this.lastname, github_username: this.github })
+        .patch(`/api/v1/users/profiles/${userid}/`, { avatar: this.avatarList[this.avatarIndex], first_name: this.firstname, last_name: this.lastname, github_username: this.github })
         .then(() => {
           this.toggleEdit()
         })
