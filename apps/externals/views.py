@@ -36,5 +36,5 @@ def ISSLoc(request):
     URL += str(lat) + ',' + str(long)
     r = requests.get(url=URL)
     data = r.json()
-    data['map_url'] = f"https://www.google.com/maps/embed/v1/search?q={lat},{long}&key={MAP_KEY}"
+    data['map_url'] = f"https://www.google.com/maps/embed/v1/search?q={lat},{long}&zoom=5&maptype=satellite&key={MAP_KEY}"
     return JsonResponse(data)
