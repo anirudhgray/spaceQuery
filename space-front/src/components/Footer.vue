@@ -40,13 +40,6 @@
                 <a class="link" href="https://api.nasa.gov/">NASA Open APIs</a>
               </li>
               <li class="w-max mx-auto">
-                <a
-                  class="link"
-                  href="https://developers.google.com/earth-engine/"
-                  >Google Earth Engine</a
-                >
-              </li>
-              <li class="w-max mx-auto">
                 <a class="link" href="https://wheretheiss.at/"
                   >Where is the ISS?</a
                 >
@@ -87,7 +80,7 @@
               </router-link>
               <a
                 class="w-max ml-auto tabcenter block link"
-                href="https://github.com/anirudhgray/space-front"
+                href="https://github.com/anirudhgray/spaceQuery"
               >
                 View on GitHub <i class="text-3xl pi pi-github"></i>
               </a>

@@ -15,8 +15,8 @@
             ><Button class="mx-auto" label="Log in"
           /></router-link>
           <Button class="mx-2" label="Learn more" @click="scrollAbout" />
-          <a class="mx-2 flex" href="https://github.com/anirudhgray/space-front"
-            ><Button class="mx-auto" label="Github"
+          <a class="mx-2 flex" href="https://github.com/anirudhgray/spaceQuery"
+            ><Button class="mx-auto" label="GitHub"
           /></a>
         </div>
         <p class="mt-8">Powered by the NASA open APIs.</p>
