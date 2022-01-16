@@ -135,7 +135,7 @@ The front-end Vue.js code lives here.
 - Save results to your profile.
 - Social Features: Public profiles.
 - Fully responsive for mobiles and tablets.
-- (TODO) Dark Mode.
+- Dark Mode.
 - (TODO) Progressive Web App.
 
 ## API Documentation
