@@ -97,6 +97,19 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'space_db',
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PWD'),
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
+
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 
 # Password validation
@@ -153,4 +166,3 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = config('EMAIL')
 EMAIL_HOST_PASSWORD = config('EMAIL_PWD')
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-django_heroku.settings(locals())
