@@ -4,16 +4,19 @@
     position="bottom-right"
     :breakpoints="{ '920px': { width: '100%', right: '0', left: '0' } }"
   ></Toast>
+  <ScrollTop :threshold="600" />
 </template>
 
 <script>
 import Toast from 'primevue/toast'
 import axios from 'axios'
+import ScrollTop from 'primevue/scrolltop'
 
 export default {
   name: 'App',
   components: {
-    Toast
+    Toast,
+    ScrollTop
   },
   beforeCreate () {
     this.$store.commit('initializeStore')
@@ -43,15 +46,17 @@ export default {
   --secondary-text-colour: rgb(82, 82, 82);
   --purple: purple;
   --skele-bg: white;
+  --link-hover-colour: black;
 }
 .darkmode {
-  --bg-colour: rgb(46, 46, 46);
-  --card-color: rgb(100, 100, 100);
-  --card-color-darker: rgb(68, 68, 68);
+  --bg-colour: rgb(20, 20, 20);
+  --card-color: rgb(34, 34, 34);
+  --card-color-darker: rgb(48, 48, 48);
   --primary-text-colour: white;
   --secondary-text-colour: rgb(175, 174, 174);
   --purple: rgb(214, 50, 214);
   --skele-bg: rgb(68, 68, 68);
+  --link-hover-colour: white;
 }
 .grey {
   background: var(--bg-colour);
@@ -152,7 +157,7 @@ a {
   color: var(--secondary-text-colour);
 }
 .link:hover {
-  color: black;
+  color: var(--link-hover-colour);
 }
 
 .github-button {
