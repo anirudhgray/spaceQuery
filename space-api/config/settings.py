@@ -97,9 +97,18 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-DATABASES = dict()
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'space_db',
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PWD'),
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
 
-DATABASES['default'] = dj_database_url.config()
+DATABASES['default'].update(dj_database_url.config())
 
 
 # Password validation
