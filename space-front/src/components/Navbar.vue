@@ -87,6 +87,12 @@
 </template>
 
 <style>
+:root {
+  --purple: purple;
+}
+.darkmode {
+  --purple: rgb(214, 50, 214);
+}
 .landing-link {
   font-size: 2rem;
 }
