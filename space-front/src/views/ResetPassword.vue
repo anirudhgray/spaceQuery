@@ -65,24 +65,6 @@
                 <Button type="submit" class="w-full" label="Reset"></Button>
               </div>
             </form>
-
-            <Message
-              class="absolute bottom-0 right-0"
-              :closable="false"
-              severity="error"
-              v-if="errors.length"
-            >
-              <p v-for="error in errors" :key="error">{{ error }}</p>
-            </Message>
-
-            <Message
-              class="absolute bottom-0 right-0"
-              :closable="false"
-              severity="success"
-              v-if="success"
-            >
-              <p>Your password has been reset successfully.</p>
-            </Message>
           </div>
         </div>
       </template>
@@ -96,7 +78,6 @@ import Card from 'primevue/card'
 import Footer from '../components/Footer.vue'
 import Password from 'primevue/password'
 import Button from 'primevue/button'
-import Message from 'primevue/message'
 import axios from 'axios'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
@@ -106,8 +87,7 @@ export default {
     Footer,
     Card,
     Password,
-    Button,
-    Message
+    Button
   },
   data () {
     return {
@@ -135,6 +115,11 @@ export default {
       if (this.newPass !== this.newPassRep) {
         this.errors.push('The new passwords do not match.')
       }
+      if (this.errors.length) {
+        for (let i = 0; i < this.errors.length; i++) {
+          this.$toast.add({ severity: 'error', summary: 'Oops.', detail: this.errors[i], life: 3000 })
+        }
+      }
 
       if (!this.errors.length) {
         const resetData = { oldPass: this.oldPass, newPass: this.newPass }
@@ -142,15 +127,18 @@ export default {
           .post('/api/v1/users/actions/reset/', resetData)
           .then(response => {
             this.success = true
+            this.$toast.add({ severity: 'success', summary: 'Your password has been reset successfully.', detail: 'Yay.', life: 3000 })
             this.oldPass = ''
             this.newPass = ''
             this.newPassRep = ''
           })
           .catch(error => {
             if (error.response) {
-              this.errors.push(error.response.data)
+              console.log(error.response.data)
+              this.$toast.add({ severity: 'error', summary: 'Error Response', detail: error.response.data, life: 3000 })
             } else if (error.message) {
-              this.errors.push('Something went wrong.' + error)
+              console.log(error)
+              this.$toast.add({ severity: 'error', summary: 'Something went wrong.', detail: error, life: 3000 })
             }
           })
       }

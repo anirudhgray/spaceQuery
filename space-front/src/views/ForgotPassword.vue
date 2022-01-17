@@ -50,23 +50,6 @@
                 <Button type="submit" class="w-full" label="Send"></Button>
               </div>
             </form>
-
-            <Message
-              class="absolute bottom-0 right-0"
-              :closable="false"
-              severity="error"
-              v-if="errors.length"
-            >
-              <p v-for="error in errors" :key="error">{{ error }}</p>
-            </Message>
-            <Message
-              class="absolute bottom-0 right-0"
-              :closable="false"
-              severity="success"
-              v-if="success"
-            >
-              Please check your inbox for the reset link.
-            </Message>
           </div>
         </div>
       </template>
@@ -80,7 +63,6 @@ import Card from 'primevue/card'
 import Footer from '../components/Footer.vue'
 import InputText from 'primevue/inputtext'
 import Button from 'primevue/button'
-import Message from 'primevue/message'
 import axios from 'axios'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
@@ -90,8 +72,7 @@ export default {
     Footer,
     Card,
     InputText,
-    Button,
-    Message
+    Button
   },
   data () {
     return {
@@ -113,14 +94,17 @@ export default {
     async forgot () {
       const forgotData = { email: this.email }
       this.success = true
+      this.$toast.add({ severity: 'success', summary: 'Password reset link sent.', detail: 'Please check your inbox.', life: 3000 })
       this.email = ''
       await axios
         .post('/api/v1/users/actions/forgot/', forgotData)
         .catch(error => {
           if (error.response) {
-            this.errors.push(error.response.data)
+            console.log(error.response.data)
+            this.$toast.add({ severity: 'error', summary: 'Error Response', detail: error.response.data, life: 3000 })
           } else if (error.message) {
-            this.errors.push('Something went wrong.' + error)
+            console.log(error)
+            this.$toast.add({ severity: 'error', summary: 'Something went wrong.', detail: error, life: 3000 })
           }
         })
     }

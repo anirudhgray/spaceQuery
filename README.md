@@ -1,7 +1,8 @@
 # spaceQuery
 A webapp built for CS50Web using Vue.js and Django.
 
-**Live Site:** blah de blah blah
+**Live Site:** [spacequery.netlify.app](https://spacequery.netlify.app)
+**API:** [spacequery-api.herokuapp.com](https://spacequery-api.herokuapp.com/api/v1/)
 
 - [spaceQuery](#spacequery)
 - [Project Overview](#project-overview)

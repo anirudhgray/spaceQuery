@@ -64,8 +64,11 @@
                 </Password>
               </div>
 
-              <div class="field">
+              <div v-if="!regLoad" class="field">
                 <Button type="submit" class="w-full" label="Register"></Button>
+              </div>
+              <div v-else class="field">
+                <Button class="w-full" icon="pi pi-spin pi-spinner"></Button>
               </div>
 
               <p class="my-2 mx-auto">or</p>
@@ -87,23 +90,6 @@
                 </p>
               </div>
             </form>
-
-            <Message
-              class="absolute bottom-0 right-0 left-0"
-              :closable="false"
-              severity="error"
-              v-if="errors.length"
-            >
-              <p v-for="error in errors" :key="error">{{ error }}</p>
-            </Message>
-            <Message
-              class="absolute bottom-0 right-0"
-              :closable="false"
-              severity="success"
-              v-if="success"
-            >
-              <p>Account created successfully. You can log in now.</p>
-            </Message>
           </div>
         </div>
       </template>
@@ -118,19 +104,17 @@ import Footer from '../components/Footer.vue'
 import InputText from 'primevue/inputtext'
 import Password from 'primevue/password'
 import Button from 'primevue/button'
-import Message from 'primevue/message'
 import axios from 'axios'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 export default {
-  name: 'AsteroidsNeoWs',
+  name: 'Register',
   components: {
     Footer,
     Card,
     InputText,
     Button,
-    Password,
-    Message
+    Password
   },
   data () {
     return {
@@ -138,7 +122,8 @@ export default {
       password: '',
       password2: '',
       errors: [],
-      success: false
+      success: false,
+      regLoad: false
     }
   },
   mounted () {
@@ -155,6 +140,7 @@ export default {
       }
     },
     async submitRegisterForm () {
+      this.regLoad = true
       this.errors = []
       this.success = false
 
@@ -166,6 +152,11 @@ export default {
       }
       if (this.password !== this.password2) {
         this.errors.push('The passwords do not match.')
+      }
+      if (this.errors.length) {
+        for (let i = 0; i < this.errors.length; i++) {
+          this.$toast.add({ severity: 'error', summary: 'Oops.', detail: this.errors[i], life: 3000 })
+        }
       }
 
       if (!this.errors.length) {
@@ -181,17 +172,21 @@ export default {
           .post('/api/v1/users/auths/', formData)
           .then(response => {
             this.success = true
+            this.$toast.add({ severity: 'success', summary: 'Account created successfully.', detail: 'You can log in now.', life: 3000 })
           })
           .catch(error => {
             if (error.response) {
               for (const property in error.response.data) {
-                this.errors.push(`${property}: ${error.response.data[property]}`)
+                console.log(`${property}: ${error.response.data[property]}`)
+                this.$toast.add({ severity: 'error', summary: property, detail: error.response.data[property], life: 3000 })
               }
             } else if (error.message) {
-              this.errors.push('Something went wrong.' + error)
+              console.log(error)
+              this.$toast.add({ severity: 'error', summary: 'Something went wrong.', detail: error, life: 3000 })
             }
           })
       }
+      this.regLoad = false
     }
   }
 }

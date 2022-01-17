@@ -90,6 +90,12 @@
               >
                 Watch demo on YouTube <i class="text-3xl pi pi-youtube"></i>
               </a>
+              <a
+                class="w-max ml-auto tabcenter block link"
+                href="https://spacequery-api.herokuapp.com/api/v1/"
+              >
+                REST API <i class="text-3xl pi pi-server"></i>
+              </a>
             </ul>
           </div>
         </div>

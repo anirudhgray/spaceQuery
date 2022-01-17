@@ -15,7 +15,7 @@ import axios from 'axios'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
-axios.defaults.baseURL = 'http://127.0.0.1:8000'
+axios.defaults.baseURL = 'https://spacequery-api.herokuapp.com/'
 AOS.init()
 
 createApp(App).use(store).use(router, axios).use(PrimeVue, { ripple: true }).use(ToastService).mount('#app')

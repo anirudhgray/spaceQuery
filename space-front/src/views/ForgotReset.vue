@@ -8,7 +8,7 @@
       <template #content>
         <div class="grid">
           <div class="r-700-invis lg:col-4 md:col-6">
-            <img src="../assets/images/roasted_planet.jpg" />
+            <img src="../assets/images/planet-with-no-star.jpg" />
           </div>
           <div class="md:col-4 lg:col-offset-2 md:col-offset-1 col-12 flex">
             <form
@@ -46,28 +46,14 @@
               <div class="field">
                 <Button type="submit" class="w-full" label="Reset"></Button>
               </div>
+
+              <div v-if="success" class="field">
+                <Button
+                  class="w-full p-button-success"
+                  label="Proceed to Log In"
+                ></Button>
+              </div>
             </form>
-
-            <Message
-              class="absolute bottom-0 right-0"
-              :closable="false"
-              severity="error"
-              v-if="errors.length"
-            >
-              <p v-for="error in errors" :key="error">{{ error }}</p>
-            </Message>
-
-            <Message
-              class="absolute bottom-0 right-0"
-              :closable="false"
-              severity="success"
-              v-if="success"
-            >
-              <p>
-                Your password has been reset successfully. Please
-                <router-link to="/login">log in</router-link>
-              </p>
-            </Message>
           </div>
         </div>
       </template>
@@ -82,18 +68,16 @@ import Footer from '../components/Footer.vue'
 import Skeleload from '../components/Skeleload.vue'
 import Password from 'primevue/password'
 import Button from 'primevue/button'
-import Message from 'primevue/message'
 import axios from 'axios'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 export default {
-  name: 'ResetPassword',
+  name: 'ForgotReset',
   components: {
     Footer,
     Card,
     Password,
     Button,
-    Message,
     Skeleload
   },
   data () {
@@ -131,20 +115,28 @@ export default {
       if (this.newPass !== this.newPassRep) {
         this.errors.push('The new passwords do not match.')
       }
+      if (this.errors.length) {
+        for (let i = 0; i < this.errors.length; i++) {
+          this.$toast.add({ severity: 'error', summary: 'Oops.', detail: this.errors[i], life: 3000 })
+        }
+      }
       if (!this.errors.length) {
         const resetData = { newPass: this.newPass, id: this.id, token: this.token }
         await axios
           .post('/api/v1/users/actions/token-check/', resetData)
           .then(response => {
             this.success = true
+            this.$toast.add({ severity: 'success', summary: 'Your password has been reset successfully. Please log in now.', detail: 'Yay.', life: 3000 })
             this.newPass = ''
             this.newPassRep = ''
           })
           .catch(error => {
             if (error.response) {
-              this.errors.push(error.response.data)
+              console.log(error.response.data)
+              this.$toast.add({ severity: 'error', summary: 'Error Response', detail: error.response.data, life: 3000 })
             } else if (error.message) {
-              this.errors.push('Something went wrong.' + error)
+              console.log(error)
+              this.$toast.add({ severity: 'error', summary: 'Something went wrong.', detail: error, life: 3000 })
             }
           })
       }
