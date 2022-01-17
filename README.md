@@ -2,8 +2,10 @@
 A webapp built for CS50Web using Vue.js and Django.
 
 **Live Site:** [spacequery.netlify.app](https://spacequery.netlify.app)
-**API:** [spacequery-api.herokuapp.com](https://spacequery-api.herokuapp.com/api/v1/)
 
+**API:** [spacequery-api.herokuapp.com](https://spacequery-api.herokuapp.com/api/v1/)
+<br/><br/>
+**Table of Contents**
 - [spaceQuery](#spacequery)
 - [Project Overview](#project-overview)
   - [Distinctiveness and Complexity](#distinctiveness-and-complexity)
@@ -23,11 +25,10 @@ A webapp built for CS50Web using Vue.js and Django.
     - [Externals](#externals)
   - [Frontend](#frontend)
     - [Third-Party APIs used](#third-party-apis-used)
-- [Learnings and Experiences](#learnings-and-experiences)
 - [Gallery](#gallery)
 
 # Project Overview
-At its core, this webapp (I've named it **spaceQuery**) acts as an app for querying a bunch of awesome space related APIs (more info below). It doesn't sound nearly as awesome now that I have written it down, but yeah. Why do I need to be logged in, you ask? Well, I've added some nifty functionality which allows you to save any query results that you particularly like to your user profile for later reference — can't do that without having you signed in. This also allows you to look up other users and look at their saved posts. I'm not entirely sure why I added this, and what purpose it serves, but it's there. Further explanation [below](#objective-and-features).
+At its core, this webapp (I've named it [**spaceQuery**](https://spacequery.netlify.app)) acts as an app for querying a bunch of awesome space related APIs. It doesn't sound nearly as awesome now that I have written it down, but yeah. Why do I need to be logged in, you ask? Well, I've added some nifty functionality which allows you to save any query results that you particularly like to your user profile for later reference — can't do that without having you signed in. This also allows you to look up other users and look at their saved posts. I'm not entirely sure why I added this, and what purpose it serves, but it's there. Further explanation [below](#objective-and-features).
 
 ## Distinctiveness and Complexity
 I believe this project is **sufficiently distinct** from the others in the course, and is not based on the 2020 CS50W Pizza project.
@@ -40,10 +41,11 @@ It is also **more complex** than the other projects in the course.
 - It also incorporates heavy usage of multiple third party APIs (for maps and other data).
 
 ## Technologies Used
-|                                                                                                                              |                                                                                                                                             |                                                                                                                                            |                                                                                                                                                   |
-| ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Vue.js** <a href="https://v3.vuejs.org/"><img src="space-front/src/assets/readmeimgs/vue.svg" alt="vue" height="200"/></a> | **Django** <a href="https://www.djangoproject.com/"><img src="space-front/src/assets/readmeimgs/django.svg" alt="django" height="200"/></a> | **DRF** <a href="https://www.django-rest-framework.org/"><img src="space-front/src/assets/readmeimgs/drf.png" alt="drf" height="200"/></a> | **PostgreSQL** <a href="https://www.postgresql.org/"><img src="space-front/src/assets/readmeimgs/postgresql.svg" alt="pstgres" height="200"/></a> |
+|                                                                                                   |                                                                                                                  |                                                                                                                 |                                                                                                                        |
+| ------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| **Vue.js** <a href="https://v3.vuejs.org/"><img src="assets/vue.svg" alt="vue" height="200"/></a> | **Django** <a href="https://www.djangoproject.com/"><img src="assets/django.svg" alt="django" height="200"/></a> | **DRF** <a href="https://www.django-rest-framework.org/"><img src="assets/drf.png" alt="drf" height="200"/></a> | **PostgreSQL** <a href="https://www.postgresql.org/"><img src="assets/postgresql.svg" alt="pstgres" height="200"/></a> |
 
+The backend and frontend have been deployed using Heroku and Netlify respectively.
 
 ## Folder Structure and Files
 
@@ -116,7 +118,7 @@ The front-end Vue.js code lives here.
 9. Create a PostgreSQL database (name it `space_db`), and add `DB_USER` (username which can access the databse) and `DB_PWD` (password for the same user) to the `.env` file. Alternatively, change the database settings to use sqlite/other database.
 10. Add `EMAIL` and `EMAIL_PWD` for the email you would like to use to send forgot password links, and receive feedback on.
 11. Generate a google maps API key from [this link](https://developers.google.com/maps/documentation/embed/map-generator), and add it to `.env` in the `MAP_KEY` environment variable.
-12. Run the app: `python manage.py runserver`
+12. Run the app: `python manage.py runserver`.
 
 ### Setting up the Vue.js front end
 1. Cd into the `space-front` directory.
@@ -131,7 +133,7 @@ The front-end Vue.js code lives here.
 - Token-based authentication.
 - Forgot/Reset password functionality.
 - (TODO) Social Auth.
-
+- SMTP Email Server.
 - Access multiple space-related APIs via an easy to use interface.
 - Save results to your profile.
 - Social Features: Public profiles.
@@ -221,6 +223,31 @@ The app is designed to be easy to use. The user can login by creating an account
 
 I also used [PrimeVue](https://primefaces.org/primevue/) for the UI Library.
 
-# Learnings and Experiences
-
 # Gallery
+<img src="assets/landing.jpg" alt="landing" width=800></img>
+<br/>
+*Landing Page (Dark Mode)*
+<br/><br/>
+<img src="assets/profile.jpg" alt="profile" width=800></img>
+<br/>
+*Profile Page (Light Mode)*
+<br/><br/>
+<img src="assets/search.jpg" alt="search" width=800></img>
+<br/>
+*User Search (Dark Mode)*
+<br/><br/>
+<img src="assets/login.jpg" alt="login" width=800></img>
+<br/>
+*Log In (Dark Mode)*
+<br/><br/>
+<img src="assets/iss_mob.jpeg" alt="iss" width=400></img>
+<br/>
+*ISS Location (Dark Mode, Mobile Device)*
+<br/><br/>
+<img src="assets/footer_mob.jpeg" alt="footer" width=400></img>
+<br/>
+*Footer (Light Mode, Mobile Device)*
+<br/><br/>
+<img src="assets/api_root.jpg" alt="api" width=800></img>
+<br/>
+*DRF API Root*
