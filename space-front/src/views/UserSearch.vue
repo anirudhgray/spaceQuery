@@ -12,6 +12,9 @@
         ></InputText>
         <Button type="submit" icon="pi pi-search"></Button>
       </form>
+      <div class="flex flex-column align-items-center">
+        <i v-if="searchLoad" class="pi pi-spin pi-spinner text-4xl mb-2"></i>
+      </div>
       <div class="grid grid-nogutter justify-content-evenly mb-2">
         <Card
           data-aos="fade-up"
@@ -55,7 +58,8 @@ export default {
   data () {
     return {
       search: '',
-      results: []
+      results: [],
+      searchLoad: false
     }
   },
   components: {
@@ -68,11 +72,13 @@ export default {
   },
   methods: {
     async searchUsers () {
+      this.searchLoad = true
       await axios
         .get(`/api/v1/users/profiles?search=${this.search}`)
         .then(response => {
           this.results = response.data
         })
+      this.searchLoad = false
     },
     routerUserPage (id) {
       this.$router.push(`/user/${id}`)

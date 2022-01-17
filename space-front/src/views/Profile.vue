@@ -95,29 +95,34 @@
       <div class="flex flex-column align-items-center">
         <i v-if="historyLoad" class="pi pi-spin pi-spinner text-4xl mb-2"></i>
       </div>
-      <div v-if="historyToggle">
-        <h2 class="text-center">History</h2>
-        <div class="grid justify-content-evenly mx-4 my-4">
-          <Card
-            v-for="historyItem in historyDisplays"
-            :key="historyItem.id"
-            class="card relative col-12 md:col-5 lg:col-3 m-3 darker-card"
-          >
-            <template #title>
-              <h2>{{ historyItem.title }}</h2>
-            </template>
-            <template #subtitle>
-              <p>{{ historyItem.search_time }}</p>
-            </template>
-            <template #content>
-              <p
-                v-for="(item, j) in Object.keys(JSON.parse(historyItem.info))"
-                :key="j"
-              >
-                {{ item }}: {{ JSON.parse(historyItem.info)[item] }}
-              </p>
-            </template>
-          </Card>
+      <div v-if="historyToggle & !historyLoad">
+        <div v-if="historyDisplays.length">
+          <h2 class="text-center">History</h2>
+          <div class="grid justify-content-evenly mx-4 my-4">
+            <Card
+              v-for="historyItem in historyDisplays"
+              :key="historyItem.id"
+              class="card relative col-12 md:col-5 lg:col-3 m-3 darker-card"
+            >
+              <template #title>
+                <h2>{{ historyItem.title }}</h2>
+              </template>
+              <template #subtitle>
+                <p>{{ historyItem.search_time }}</p>
+              </template>
+              <template #content>
+                <p
+                  v-for="(item, j) in Object.keys(JSON.parse(historyItem.info))"
+                  :key="j"
+                >
+                  {{ item }}: {{ JSON.parse(historyItem.info)[item] }}
+                </p>
+              </template>
+            </Card>
+          </div>
+        </div>
+        <div v-else>
+          <h2 class="text-center">You haven't made any queries yet.</h2>
         </div>
       </div>
 

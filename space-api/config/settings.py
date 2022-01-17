@@ -34,7 +34,7 @@ ALLOWED_HOSTS = ['spacequery-api.herokuapp.com', '127.0.0.1']
 CORS_ORIGIN_ALLOW_ALL = False
 
 CORS_ORIGIN_WHITELIST = (
-    'http://192.168.1.33:8080',
+    'http://192.168.1.33:8080', 'https://spacequery.netlify.app'
 )
 
 # Application definition
