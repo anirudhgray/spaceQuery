@@ -87,38 +87,8 @@
 </template>
 
 <style>
-:root {
-  --purple: purple;
-}
-.darkmode {
-  --purple: rgb(214, 50, 214);
-}
 .landing-link {
   font-size: 2rem;
-}
-.navlink.router-link-exact-active::after {
-  content: " ";
-  display: block;
-  width: 100%;
-  height: 2px;
-  background-color: var(--purple);
-  transition: width 300ms;
-}
-.navlink {
-  color: var(--purple);
-  text-decoration: none;
-  font-family: sans-serif;
-}
-.navlink::after {
-  content: " ";
-  display: block;
-  width: 0;
-  height: 2px;
-  background-color: var(--purple);
-  transition: width 300ms;
-}
-.navlink:hover::after {
-  width: 100%;
 }
 ul {
   padding: 0;

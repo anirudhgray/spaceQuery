@@ -44,7 +44,7 @@ export default {
   --card-color-darker: grey;
   --primary-text-colour: black;
   --secondary-text-colour: rgb(82, 82, 82);
-  --purple: purple;
+  --anim-link-colour: purple;
   --skele-bg: white;
   --link-hover-colour: black;
 }
@@ -54,7 +54,7 @@ export default {
   --card-color-darker: rgb(48, 48, 48);
   --primary-text-colour: white;
   --secondary-text-colour: rgb(175, 174, 174);
-  --purple: rgb(214, 50, 214);
+  --anim-link-colour: rgb(214, 50, 214);
   --skele-bg: rgb(68, 68, 68);
   --link-hover-colour: white;
 }
@@ -70,6 +70,22 @@ export default {
 }
 html {
   background: var(--bg-colour);
+}
+.navlink.router-link-exact-active::after {
+  content: " ";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--anim-link-colour);
+  transition: width 300ms;
+}
+.navlink {
+  color: var(--anim-link-colour);
+  text-decoration: none;
+  font-family: sans-serif;
+}
+.navlink:hover {
+  color: var(--link-hover-colour);
 }
 
 /* reset margin */
@@ -124,26 +140,14 @@ select {
 .no-pad {
   padding: 0;
 }
-.result-card::after {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  content: " ";
-  z-index: -1;
-  background-color: transparent;
-  border: 3px solid var(--purple);
-  opacity: 0;
-  transition: opacity ease-in-out 250ms;
-}
-.result-card:hover::after {
-  opacity: 1;
-}
 .result-card {
   position: relative;
   z-index: 1;
   max-width: 35rem;
+}
+.result-card:hover {
+  cursor: pointer;
+  background: var(--card-color-darker);
 }
 a {
   text-decoration: none;
