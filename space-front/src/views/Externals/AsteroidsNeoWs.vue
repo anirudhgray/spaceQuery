@@ -13,7 +13,12 @@
       <template #subtitle>
         <p>
           Near Earth Object Web Service. Credit:
-          <a href="https://github.com/SpaceRocks/">The SpaceRocks Team</a>
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://github.com/SpaceRocks/"
+            >The SpaceRocks Team</a
+          >
         </p>
       </template>
       <template #content>

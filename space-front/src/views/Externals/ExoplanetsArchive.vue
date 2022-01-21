@@ -14,6 +14,8 @@
         <p>
           Access NASA's vast archive of exoplanet data. Credit:
           <a
+            target="_blank"
+            rel="noopener"
             href="https://exoplanetarchive.ipac.caltech.edu/docs/program_interfaces.html"
             >NASA</a
           >

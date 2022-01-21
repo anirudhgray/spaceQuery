@@ -61,8 +61,11 @@
                 />
               </div>
 
-              <div class="field">
+              <div v-if="!resetLoad" class="field">
                 <Button type="submit" class="w-full" label="Reset"></Button>
+              </div>
+              <div v-else class="field">
+                <Button class="w-full" icon="pi pi-spin pi-spinner"></Button>
               </div>
             </form>
           </div>
@@ -95,11 +98,13 @@ export default {
       newPass: '',
       newPassRep: '',
       errors: [],
-      success: false
+      success: false,
+      resetLoad: false
     }
   },
   methods: {
     async resetForm () {
+      this.resetLoad = true
       this.errors = []
       this.success = false
 
@@ -142,6 +147,7 @@ export default {
             }
           })
       }
+      this.resetLoad = false
     }
   }
 }

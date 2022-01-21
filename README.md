@@ -1,5 +1,5 @@
 # spaceQuery
-A webapp built for CS50Web using Vue.js and Django.
+A webapp built for [CS50Web](https://cs50.harvard.edu/web/2020/) using Vue.js and Django.
 
 **Live Site:** [spacequery.netlify.app](https://spacequery.netlify.app)
 

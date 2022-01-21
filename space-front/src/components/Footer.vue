@@ -12,46 +12,88 @@
               <li class="w-max lg:mt-0 mt-2 mr-auto tabcenter">
                 <a
                   class="link"
+                  target="_blank"
+                  rel="noopener"
                   href="https://icons8.com/illustrations/author/6103782c1781404355b65f35"
                   >Anna Yashina</a
                 >
                 from
-                <a class="link" href="https://icons8.com/illustrations"
+                <a
+                  class="link"
+                  target="_blank"
+                  rel="noopener"
+                  href="https://icons8.com/illustrations"
                   >Ouch!</a
                 >
               </li>
               <li class="w-max mr-auto tabcenter">
-                <a href="https://icons8.com">Icons8</a>
+                <a target="_blank" rel="noopener" href="https://icons8.com"
+                  >Icons8</a
+                >
               </li>
               <li class="w-max mr-auto tabcenter">
-                <a class="link" href="https://drawkit.com/">Drawkit</a>
+                <a
+                  target="_blank"
+                  rel="noopener"
+                  class="link"
+                  href="https://drawkit.com/"
+                  >Drawkit</a
+                >
               </li>
               <li class="w-max mr-auto tabcenter">
-                <a class="link" href="https://exoplanets.nasa.gov/">NASA</a>
+                <a
+                  target="_blank"
+                  rel="noopener"
+                  class="link"
+                  href="https://exoplanets.nasa.gov/"
+                  >NASA</a
+                >
               </li>
               <li class="w-max mr-auto tabcenter">
-                <a class="link" href="https://www.humaaans.com/">Humaaans</a>
+                <a
+                  target="_blank"
+                  rel="noopener"
+                  class="link"
+                  href="https://www.humaaans.com/"
+                  >Humaaans</a
+                >
               </li>
             </ul>
           </div>
           <div class="col">
             <ul class="mx-auto w-max text-center">
               <li class="w-max mx-auto">
-                <a class="link" href="https://api.nasa.gov/">NASA Open APIs</a>
+                <a
+                  target="_blank"
+                  rel="noopener"
+                  class="link"
+                  href="https://api.nasa.gov/"
+                  >NASA Open APIs</a
+                >
               </li>
               <li class="w-max mx-auto">
-                <a class="link" href="https://wheretheiss.at/"
+                <a
+                  class="link"
+                  target="_blank"
+                  rel="noopener"
+                  href="https://wheretheiss.at/"
                   >Where is the ISS?</a
                 >
               </li>
               <li class="w-max mx-auto">
-                <a class="link" href="https://github.com/SpaceRocks/"
+                <a
+                  class="link"
+                  target="_blank"
+                  rel="noopener"
+                  href="https://github.com/SpaceRocks/"
                   >SpaceRocks</a
                 >
               </li>
               <li class="w-max mx-auto">
                 <a
                   class="link"
+                  target="_blank"
+                  rel="noopener"
                   href="https://github.com/chrisccerami/mars-photo-api"
                   >Mars Rover Photo API</a
                 >
@@ -59,6 +101,8 @@
               <li class="w-max mx-auto">
                 <a
                   class="link"
+                  target="_blank"
+                  rel="noopener"
                   href="https://exoplanetarchive.ipac.caltech.edu/docs/program_interfaces.html"
                   >Exoplanet Archive (Caltech)</a
                 >
@@ -80,17 +124,23 @@
               </router-link>
               <a
                 class="w-max ml-auto tabcenter block link"
+                target="_blank"
+                rel="noopener"
                 href="https://github.com/anirudhgray/spaceQuery"
               >
                 View on GitHub <i class="text-3xl pi pi-github"></i>
               </a>
               <a
                 @click="notImplemented"
+                target="_blank"
+                rel="noopener"
                 class="w-max ml-auto tabcenter block link"
               >
                 Watch demo on YouTube <i class="text-3xl pi pi-youtube"></i>
               </a>
               <a
+                target="_blank"
+                rel="noopener"
                 class="w-max ml-auto tabcenter block link"
                 href="https://spacequery-api.herokuapp.com/api/v1/"
               >
@@ -103,7 +153,13 @@
       <template #footer>
         <p class="text-center">
           Made for
-          <a class="link" href="https://cs50.harvard.edu/web/2020/">CS50W.</a>
+          <a
+            class="link"
+            target="_blank"
+            rel="noopener"
+            href="https://cs50.harvard.edu/web/2020/"
+            >CS50W.</a
+          >
         </p>
       </template>
     </Card>

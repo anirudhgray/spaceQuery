@@ -9,6 +9,7 @@
         v-for="(api, i) in apiDetails"
         :key="i"
         class="card m-2 px-2 -pb-1 result-card"
+        @click="this.$router.push(`/explore/external/${api.url_name}`)"
       >
         <template #header>
           <Image
@@ -26,7 +27,9 @@
           {{ api.description }}
         </template>
         <template #footer>
-          <a :href="api.link">{{ api.credit }}</a>
+          <a @click.stop="" target="_blank" rel="noopener" :href="api.link">{{
+            api.credit
+          }}</a>
         </template>
       </Card>
     </div>

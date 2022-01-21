@@ -12,7 +12,11 @@
       <div class="flex flex-column align-items-center">
         <div class="grid mobcol">
           <router-link class="mx-2 flex" to="/login"
-            ><Button class="mx-auto" label="Log in"
+            ><Button
+              v-if="!this.$store.state.isAuthenticated"
+              class="mx-auto"
+              label="Log in" />
+            <Button v-else class="mx-auto" label="Profile"
           /></router-link>
           <Button class="mx-2" label="Learn more" @click="scrollAbout" />
           <a class="mx-2 flex" href="https://github.com/anirudhgray/spaceQuery"
@@ -146,7 +150,11 @@
         class="md:col-4 md:col-offset-4 no-pad"
       />
       <router-link class="mx-auto" to="/login"
-        ><Button label="Get Started"></Button
+        ><Button
+          v-if="!this.$store.state.isAuthenticated"
+          label="Get Started"
+        ></Button
+        ><Button v-else label="Profile"></Button
       ></router-link>
     </div>
 

@@ -15,7 +15,10 @@
         <p>
           Image data gathered by NASA's Perseverance, Curiosity, Opportunity and
           Spirit rovers on Mars. Credit:
-          <a href="https://github.com/chrisccerami/mars-photo-api"
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://github.com/chrisccerami/mars-photo-api"
             >Chris Cerami</a
           >
         </p>

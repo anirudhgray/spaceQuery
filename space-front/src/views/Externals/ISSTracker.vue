@@ -15,7 +15,9 @@
         <p>
           Where is the ISS right now? Get coordinates and satellite imagery.
           Credit:
-          <a href="https://wheretheiss.at/">Where the ISS at?</a>
+          <a target="_blank" rel="noopener" href="https://wheretheiss.at/"
+            >Where the ISS at?</a
+          >
         </p>
       </template>
       <template #content>

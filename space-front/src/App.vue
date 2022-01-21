@@ -4,7 +4,7 @@
     position="bottom-right"
     :breakpoints="{ '920px': { width: '100%', right: '0', left: '0' } }"
   ></Toast>
-  <ScrollTop :threshold="600" />
+  <ScrollTop class="scrolltop" :threshold="600" />
 </template>
 
 <script>
@@ -41,12 +41,13 @@ export default {
 :root {
   --bg-colour: rgb(247, 247, 247);
   --card-color: white;
-  --card-color-darker: grey;
+  --card-color-darker: rgb(220, 220, 220);
   --primary-text-colour: black;
   --secondary-text-colour: rgb(82, 82, 82);
   --anim-link-colour: purple;
   --skele-bg: white;
   --link-hover-colour: black;
+  --scrolltop-colour: rgba(0, 0, 0, 0.7);
 }
 .darkmode {
   --bg-colour: rgb(20, 20, 20);
@@ -57,6 +58,10 @@ export default {
   --anim-link-colour: rgb(214, 50, 214);
   --skele-bg: rgb(68, 68, 68);
   --link-hover-colour: white;
+  --scrolltop-colour: rgba(214, 50, 214, 0.7);
+}
+.p-scrolltop.p-link {
+  background: var(--scrolltop-colour);
 }
 .grey {
   background: var(--bg-colour);
@@ -115,10 +120,7 @@ p {
 
 /* set up the body */
 body {
-  font-family: var(--ff-sans-normal);
-  font-size: var(--fs-400);
   color: var(--primary-text-colour);
-  background-color: hsl(var(--clr-dark));
   line-height: 1.5;
   min-height: 100vh;
 }
