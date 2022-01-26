@@ -22,6 +22,30 @@
             >Chris Cerami</a
           >
         </p>
+        <p>
+          <strong>So, how do you actually use this thing? It's simple:</strong>
+        </p>
+        <p>1. Select a rover (Perseverance is selected by default)</p>
+        <p>
+          2. Enter a mars sol. This is basically the number of days since the
+          rover landed on mars. So, mars sol 0 is the first day, mars sol 1 is
+          the second day, and so on. Feel free to select Mars Sol 0 (the
+          default)
+        </p>
+        <p>
+          3. Don't worry about the other parameters — push the search button
+          below!
+        </p>
+        <p>
+          4. Once an image is returned, you'll have the option of saving it to
+          your profile, or going through the other images clicked on that day
+          via the Next/Previous buttons.
+        </p>
+        <p>
+          5. If no image is available for that sol/day/rover/camera combination,
+          you'll get a warning symbol. Feel free to try again with a different
+          query (hint, Perseverance, Mars Sol 0 has some nice pics).
+        </p>
       </template>
       <template #content>
         <form @submit.prevent="sendQuery">
@@ -224,7 +248,7 @@ export default {
       rover: null,
       dayFilterChoice: 'Mars Sol',
       dayEarth: null,
-      dayMars: null,
+      dayMars: 0,
       camera: null,
       cameraList: null,
       results: [],
